@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiking places</title>
+</head>
+<body>
+    {% for place in places %}
+    <h3>{{ place.name }}</h3>
+    {{ place.county }}<br>
+    {{ place.map_location }}<br>
+    {{ place.image }}
+    {{ place.category }} <br>
+    <p>{{ place.description }} </p>
+    {{ place.length }}
+    {{ place.est_time }}
+    {{ place.reviews }}
+    {% endfor %}
+</body>
+</html>
