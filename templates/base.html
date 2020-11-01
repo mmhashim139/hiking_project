@@ -19,17 +19,18 @@
 </head>
 
 <body>
-
+	<!-- Header Area-->
 	<header>
+		<!-- Navabar code from Code Institute Data centric Mini Project , edited to add button feature -->
 		<!-- top navbar -->
 		<nav class="nav-extended text-shadow black">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">HIKING</a>
+				<a href="{{ url_for('home_page') }}" class="brand-logo">HIKING</a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down">
-					<li><a href="#">Home</a></li>
-					<li><a href="{{ url_for('all_places') }}">All Places</a></li>
-					<li><a href="#">Our Community</a></li>
+					<li><a href="{{ url_for('home_page') }}">Home</a></li>
+					<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
+					<li><a href="#">Hikers</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
 					<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
@@ -43,15 +44,59 @@
 			<li>
 				<h4 class="center-align brand-logo">HIKING</h4>
 			</li>
-			<li><a href="#">Home</a></li>
-			<li><a href="{{ url_for('all_places') }}">All Places</a></li>
-			<li><a href="#">Our Community</a></li>
+			<li><a href="{{ url_for('home_page') }}">Home</a></li>
+			<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
+			<li><a href="#">Hikers</a></li>
 			<li><a href="#">My Account</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
 		</ul>
+
+		<!-- Header carousel slider Only in Home Page-->
+
+		{% block slider %}
+
+		{% endblock %}
+
 	</header>
+
+        <!-- Hiking Place page-->
+        {% block allplaces %}
+        {% endblock %}
+
+
+
+
+<!-- Footer Section-->
+	<footer class="page-footer grey darken-2">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">HIKING</h5>
+					<ul>
+						<li><a class="white-text text-lighten-3" href="{{ url_for('home_page') }}">Home</a></li>
+                        <li><a class="white-text text-lighten-3" href="{{ url_for('all_places') }}">All Places</a></li>
+                        <li><a class="white-text text-lighten-3" href="">Hikers</a></li>
+					</ul>
+				</div>
+				<div class="col l4 offset-l2 s12">
+					<h5 class="white-text">Follow us </h5>
+					<ul>
+						<li><a class="white-text text-lighten-3" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+						<li><a class="white-text text-lighten-3" href="wwww.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a class="white-text text-lighten-3" href="www.twitter.com" target="_blank"><i class="fab fa-twitter-square"></i> Twitter</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				© 2020 Copyright This website is for Educational Purposes Only, Built for Code Institute as MS3
+			</div>
+		</div>
+	</footer>
+
 
 
 
