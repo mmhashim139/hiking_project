@@ -20,6 +20,10 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+def home_page():
+    return render_template("base.html")
+
+
 # show place form DB to test MongoDB connection
 @app.route("/all_places")
 def all_places():
