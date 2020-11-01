@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+{% block slider %}
+		<!-- Header carousel slider -->
+
+		<!-- 
+            Header Carouse slider inspired by Brad Traversy from Traversy Media 
+            In Materialize CSS tutorial on youtube He used Vanila JS  , 
+            So The code Edited to use Jquery , see script.js line 4 to line 12
+        -->
+        
+		<section class="slider">
+			<ul class="slides">
+				<li>
+					<img src="https://cdn.pixabay.com/photo/2015/10/12/15/01/mountain-984083_960_720.jpg" alt="Header-slider-image-1">
+					<div class="caption center-align">
+						<h2 >Best Places To Hike In Ireland</h2>
+						<h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet
+							consectetur</h5>
+						<a href="#" class="btn btn-large deep-orange lighten-2 ">See Places</a>
+					</div>
+				</li>
+				<li>
+					<img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg" alt="Header-slider-image-2">
+					<div class="caption left-align">
+						<h2 >Most Popular Hiking Trails</h2>
+						<h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet</h5>
+						<a href="#" class="btn btn-large deep-orange lighten-2 ">See Places</a>
+					</div>
+				</li>
+				<li>
+					<img src="https://cdn.pixabay.com/photo/2016/11/19/12/58/adventure-1839147_960_720.jpg" alt="Header-slider-image-3">
+					<div class="caption right-align">
+						<h2>Meet Fellow Hikers</h2>
+						<h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet!</h5>
+						<a href="#" class="btn btn-large deep-orange lighten-2 ">Find Hikers</a>
+					</div>
+				</li>
+				<li>
+					<img src="https://cdn.pixabay.com/photo/2017/04/29/08/46/hiking-2270261_960_720.jpg" alt="Header-slider-image-4">
+					<div class="caption left-align">
+						<h2 >Organise Hikes Together</h2>
+						<h5 class="light grey-text text-lighten-3 hide-on-small-only">Veniam non illo earum cumque id est!</h5>
+						<a href="#" class="btn btn-large deep-orange lighten-2 ">Find Hikers</a>
+					</div>
+				</li>
+			</ul>
+		</section>
+
+{% endblock %}
