@@ -63,3 +63,68 @@
 .card-image {
     /* fix image sizing */
 }
+
+
+/* ======== Hiker Cards style ====== ===*/
+
+.hiker-card{
+    border: 1px solid rgba(255, 81, 28, 0.05); 
+}
+
+.owl-carousel .owl-item img {
+    height: 150px;
+    width: 50%;
+    border-radius: 50%;
+    display: block;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.hiker-name {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.hiker-state{
+    text-align: center;
+}
+
+.hiker-state-key {
+    font-size: 16px;
+    font-weight: 500;
+    color: gray;
+    padding: 0px 5px;
+}
+.hiker-state-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(255, 81, 28);
+    padding: 0px 5px;
+}
+
+.hiker-bio {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 2px 0px;
+    text-align: center;
+}
+
+.hiker-card-act {
+    text-align: center;
+}
+
+.hiker-card-act-btn {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(255, 81, 28);
+}
+
+.owl-nav {
+    color: rgba(255, 255, 255, 0);
+}
