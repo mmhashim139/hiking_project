@@ -10,6 +10,8 @@
 		crossorigin="anonymous" type="text/css">
 	<!--Import materialize-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Import Owl Carousel--> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
 	<!--link with local css style file-->
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 	<!--Let browser know website is optimized for mobile-->
@@ -65,6 +67,10 @@
         {% block places_cards %}
         {% endblock %}
 
+        <!-- Hikers cards -->
+        {% block hikers %}
+
+        {% endblock %}
 
 
 
@@ -109,6 +115,8 @@
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<!--Jlink with Materialize javascrip file-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Jlink with Owl Carousel javascrip file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 	<!--link with local javascript file -->
 	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
