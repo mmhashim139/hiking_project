@@ -7,6 +7,9 @@
 
 /* ======== Header Slider ====== ===*/
 
+.slider .slides li .caption{ 
+    text-shadow: 5px 5px 10px black;
+}
 .slider .btn {
-  margin-top: 50px;
+    margin-top: 50px;
 }
