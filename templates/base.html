@@ -32,7 +32,7 @@
 				<ul class="right hide-on-med-and-down">
 					<li><a href="{{ url_for('home_page') }}">Home</a></li>
 					<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
-					<li><a href="#">Hikers</a></li>
+					<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
 					<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
@@ -48,7 +48,7 @@
 			</li>
 			<li><a href="{{ url_for('home_page') }}">Home</a></li>
 			<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
-			<li><a href="#">Hikers</a></li>
+			<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
 			<li><a href="#">My Account</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
@@ -86,7 +86,7 @@
 					<ul>
 						<li><a class="white-text text-lighten-3" href="{{ url_for('home_page') }}">Home</a></li>
                         <li><a class="white-text text-lighten-3" href="{{ url_for('all_places') }}">All Places</a></li>
-                        <li><a class="white-text text-lighten-3" href="">Hikers</a></li>
+                        <li><a class="white-text text-lighten-3" href="{{ url_for('all_hikers') }}">Hikers</a></li>
 					</ul>
 				</div>
 				<div class="col l4 offset-l2 s12">
