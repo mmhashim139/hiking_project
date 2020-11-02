@@ -1,17 +1,52 @@
 {% extends "base.html" %}
 
 {% block allplaces %}
-
+<section>
+  <div class="container">
+    <h2 class="header">Best To HIKINIE</h2>
+  </div>
 {% for place in places %}
-    <h3>{{ place.name }}</h3>
-    {{ place.county }}<br>
-    {{ place.map_location }}<br>
-    {{ place.image }}
-    {{ place.category }} <br>
-    <p>{{ place.description }} </p>
-    {{ place.length }}
-    {{ place.est_time }}
-    {{ place.reviews }}
-{% endfor %}
+  <div class="container">
 
+    <!-- Place Card-->
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="row">
+          <div class="card-image col s12 m4">
+            <img
+              src="{{ place.image }}"
+            />
+          </div>
+          <div class="card-content col s12 m8">
+            <div class="place-header">
+              {{ place.name }}
+            </div>
+            <div>
+              <span><i class="place-stars fas fa-star"></i></span>
+              <span><i class="place-stars fas fa-star"></i></span>
+              <span><i class="place-stars fas fa-star"></i></span>
+              <span><i class="place-stars fas fa-star-half-alt"></i></span>
+              <span><i class="place-stars far fa-star"></i></span>
+            </div>
+            <span class="place-county">{{ place.county }}</span>
+            <span class="place-category">{{ place.category }}</span>
+            <span class="place-state-key">Length</span>
+            <span class="place-state-value">{{ place.length }}</span>
+            <span class="place-state-key">Est. Time</span>
+            <span class="place-state-value">{{ place.est_time }}</span>
+            <div class="place-description-div">
+              <p class="place-description">
+                {{ place.description }}
+              </p>
+            </div>
+            <div class="place-action-div col s12">
+              <a class="place-action-btn" href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</section>
 {% endblock %}
