@@ -15,30 +15,51 @@
 }
 
 /* ======== Place Cards style ====== ===*/
-
 .place-header{
-
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 18px;
+    font-weight: 700;
 }
 .place-county{
-
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+    display: flex;
+    padding: 3px 0px;
 }
 .place-state-key {
-    
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    padding: 0px 2px;
 }
 .place-state-value {
-
+    border: 1px solid rgb(255, 81, 28); 
+    padding: 0px 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
 }
-.place-description-div{
 
-}
 .place-description {
-
-}
-.place-action-div{
-
-}
-.place-action-btn{
-    
+    font-size: 16px;
+    font-weight: 400;
+    color: gray;
+    padding: 2px 0px;
 }
 
+.place-action-btn {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(255, 81, 28);
+    margin-left: 70% ;
+}
 
+.place-stars {
+    color: rgb(255, 81, 28);
+}
+
+.card-image {
+    /* fix image sizing */
+}
