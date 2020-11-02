@@ -24,11 +24,18 @@ def home_page():
     return render_template("home.html")
 
 
-# show place form DB to test MongoDB connection
+# show All places in Hiking places page
 @app.route("/all_places")
 def all_places():
     places = mongo.db.places.find()
     return render_template("places.html", places=places)
+
+
+# show All places in Hiking places page
+@app.route("/all_hikers")
+def all_hikers():
+    hikers = mongo.db.users.find()
+    return render_template("hikers.html", hikers=hikers)
 
 
 # make sure to debug= False before submit
