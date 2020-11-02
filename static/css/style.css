@@ -20,19 +20,27 @@
     font-size: 18px;
     font-weight: 700;
 }
-.place-county{
+.place-county {
     font-size: 14px;
     font-weight: 400;
     color: gray;
     display: flex;
     padding: 3px 0px;
 }
-.place-state-key {
+.place-category {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 0px 2px;
+    display: flex;
+}
+.place-state-key  {
     font-size: 14px;
     font-weight: 400;
     color: black;
     padding: 0px 2px;
 }
+
 .place-state-value {
     border: 1px solid rgb(255, 81, 28); 
     padding: 0px 5px;
