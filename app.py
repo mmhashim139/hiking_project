@@ -44,6 +44,12 @@ def hiker_profile():
     return render_template("hiker_profile.html")
 
 
+# show Place page
+@app.route("/place_page")
+def place_page():
+    return render_template("place_page.html")
+
+
 # make sure to debug= False before submit
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
