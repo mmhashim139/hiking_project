@@ -38,6 +38,12 @@ def all_hikers():
     return render_template("hikers.html", hikers=hikers)
 
 
+# show Hiker profile page
+@app.route("/hiker_profile")
+def hiker_profile():
+    return render_template("hiker_profile.html")
+
+
 # make sure to debug= False before submit
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
