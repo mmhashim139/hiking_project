@@ -69,3 +69,15 @@ $(document).ready(function(){
         opacity: 0.8
     });
   });
+
+
+ // Initialize Materialize Parallax ..
+    $(document).ready(function(){
+    $('.parallax').parallax();
+  });
+        
+ // Initialize Materialize Tool tipped ..
+    $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+        
