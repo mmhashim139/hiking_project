@@ -136,3 +136,41 @@
 .owl-nav {
     color: rgba(255, 255, 255, 0);
 }
+
+
+/* ======== Hiker Profile Style ====== ===*/
+
+/*  Profile header */
+.profile-header{
+  display: flex ;
+  height: 280px;
+}
+
+.hiker-profile-img {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    display: block;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hiker-profile-bio{
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 2px 0px;
+    text-align: center;
+}
+
+.hiker-socials{
+    text-align: center;
+}
+.hiker-socials-icon {
+    margin-top: 5px;
+    font-size: 18px;
+    color: rgb(255, 81, 28);
+    padding: 0 10px;
+    display: inline-block;
+}
