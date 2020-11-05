@@ -62,4 +62,10 @@ $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
 
- 
+  // Initialize Modal Form for sign up ..
+
+  $(document).ready(function(){
+    $('.modal').modal({
+        opacity: 0.8
+    });
+  });
