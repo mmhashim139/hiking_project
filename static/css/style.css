@@ -226,3 +226,29 @@
     text-align: center;
     padding: 0 5px;
 }
+
+
+/*  Sign up Call To Action section */
+.cta-header{
+    display: block;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+
+}
+
+.sign-up-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.modal-header {
+    display: block;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
