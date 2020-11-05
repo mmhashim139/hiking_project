@@ -23,7 +23,7 @@
           <p>{{ user.bio }}</p>
         </div>
         <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="#">Visit Profile</a>
+          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile') }}">Visit Profile</a>
         </div>
       </div>
       {% endfor %}
