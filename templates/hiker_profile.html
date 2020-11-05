@@ -1,12 +1,49 @@
-{% extends "base.html" %} 
-
-{% block hiker_profile %}
-
-<h2>This is my profile</h2>
-
-
-
-
-
+{% extends "base.html" %} {% block hiker_profile %}
+<!-- Hiker Profile section -->
+<section>
+  <div class="container">
+    <!-- Hiker profile Header 
+    Showes Hiker Details like image , name bio etc..
+    -->
+    <div class="profile-header">
+      <img
+        class="hiker-profile-img"
+        src="https://cdn.pixabay.com/photo/2010/12/23/13/06/climber-4048_960_720.jpg"
+      />
+    </div>
+    <div class="hiker-name">Hiker Name</div>
+    <div class="hiker-state">
+      <span class="hiker-state-key">Completed</span>
+      <span class="hiker-state-value">3</span>
+      <span class="hiker-state-key">Planing</span>
+      <span class="hiker-state-value">2</span>
+    </div>
+    <div class="hiker-socials">
+      <a
+        class="hiker-socials-icon"
+        href="https://www.facebook.com"
+        target="_blank"
+        ><i class="fab fa-facebook"></i
+      ></a>
+      <a
+        class="hiker-socials-icon"
+        href="https://www.instagram.com/"
+        target="_blank"
+        ><i class="fab fa-instagram"></i
+      ></a>
+      <a
+        class="hiker-socials-icon"
+        href="https://www.twitter.com"
+        target="_blank"
+        ><i class="fab fa-twitter-square"></i
+      ></a>
+    </div>
+    <div class="hiker-profile-bio">
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe vel
+        tempore hic corrupti corporis laborum?
+      </p>
+    </div>
+  </div>
+</section>
 {% endblock %}
-
