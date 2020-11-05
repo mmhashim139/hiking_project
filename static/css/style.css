@@ -60,7 +60,6 @@
 .place-action-btn {
     font-size: 14px;
     font-weight: 500;
-    color: rgb(255, 81, 28);
     margin-left: 70% ;
 }
 
@@ -69,7 +68,9 @@
 }
 
 .card-image {
-    /* fix image sizing */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -188,3 +189,40 @@
     padding: 15px;
 }
 
+
+/*  Hiker Trails Card  */
+.place-review-header {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.place-review-para{
+    font-size: 16px;
+    font-weight: 400;
+    color: gray;
+    padding: 2px 0px;
+}
+
+.completed-icon{
+    color: rgb(55, 255, 28);
+    margin-top: 5px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.plan-icon{
+    color: rgb(255, 81, 28);
+    margin-top: 5px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.trail-btm-div {
+    margin: 10px 0px;
+    text-align: center;
+}
+.trail-btm-info {
+    text-align: center;
+    padding: 0 5px;
+}
