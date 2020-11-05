@@ -54,3 +54,12 @@ $(document).ready(function(){
     }
   });
 }); 
+
+
+      // Hiker images gallery in hiker profile 
+       
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+
+  
