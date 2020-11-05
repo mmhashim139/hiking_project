@@ -60,7 +60,8 @@
 .place-action-btn {
     font-size: 14px;
     font-weight: 500;
-    margin-left: 70% ;
+    margin-left: 60% ;
+    margin-bottom: 5px;
 }
 
 .place-stars {
@@ -230,9 +231,10 @@
 
 /*  Sign up Call To Action section */
 .cta-header{
+    padding-top: 50px;
     display: block;
     color: rgba(0, 0, 0, 0.75);
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
     text-align: center;
 
@@ -251,4 +253,27 @@
     font-size: 28px;
     font-weight: 700;
     text-align: center;
+}
+
+
+.more-hiker-slider{
+    height: 450px !important;
+}
+/*  More Trail Cards In Hiker profile page  */
+.more-trail-slider{
+    height: 400px !important;
+}
+.more-trail-card {
+    padding-bottom: 15px; 
+}
+.more-trail-image {
+    height: 250px !important;
+    width: 100% !important;
+    border-radius: 0% !important;
+}
+
+.more-div{
+    display: block;
+    text-align: center;
+    padding-bottom: 20px;
 }
