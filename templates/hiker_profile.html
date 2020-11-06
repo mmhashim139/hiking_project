@@ -81,39 +81,47 @@
               <div class="row">
                 <div class="input-field col s12">
                   <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"><i class="fab fa-facebook"></i>  Facebook link</label>
+                  <label for="icon_prefix"
+                    ><i class="fab fa-facebook"></i> Facebook link</label
+                  >
                 </div>
                 <div class="input-field col s12">
                   <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"><i class="fab fa-instagram"></i>  Instagram link</label>
+                  <label for="icon_prefix"
+                    ><i class="fab fa-instagram"></i> Instagram link</label
+                  >
                 </div>
                 <div class="input-field col s12">
                   <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"><i class="fab fa-twitter-square"></i>  Twitter link</label>
+                  <label for="icon_prefix"
+                    ><i class="fab fa-twitter-square"></i> Twitter link</label
+                  >
                 </div>
               </div>
               <!-- upload profile picture-->
-              <div class="file-field input-field">
-                <div class="btn">
-                  <span>Profile Picture</span>
-                  <input type="file" />
-                </div>
-                <div class="file-path-wrapper">
-                  <input
-                    class="file-path validate"
-                    placeholder="Upload Profile Picture"
-                    type="text"
-                  />
-                </div>
+              <div class="row">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                      <span><i class="fas fa-cloud-upload-alt"></i></span>
+                      <input type="file" />
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input
+                        class="file-path validate"
+                        placeholder="Upload Image"
+                        type="text"
+                      />
+                    </div>
+                  </div>
               </div>
               <!-- Submit Btn-->
-            <div class="">
-              <a
-                href="#!"
-                class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
-                >Edit Profile</a
-              >
-            </div>
+              <div class="row">
+                <a
+                  href="#!"
+                  class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
+                  >Edit Profile</a
+                >
+              </div>
             </form>
           </div>
         </div>
@@ -127,15 +135,57 @@
     <h3 class="cta-header">
       { name } Gallery
       <a
-        href="#"
-        class="tooltipped"
+        href="#upload_gla_img"
+        class="tooltipped modal-trigger tooltipped"
         data-position="bottom"
         data-tooltip="Add Image"
-        ><span class="hiker-state-value"
-          ><i class="far fa-plus-square"></i></span
-      ></a>
+      >
+        <span class="hiker-state-value"
+          ><i class="far fa-plus-square"></i
+        ></span>
+      </a>
     </h3>
-
+    <!-- Upload image to gallery form-->
+    <div id="upload_gla_img" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12">
+            <!-- Select Trail linked to images uploaded-->
+            <div class="input-field col s12">
+              <select>
+                <option value="" disabled selected>Choose the Trail</option>
+                <option value="1">Trail A</option>
+                <option value="2">Trail B</option>
+                <option value="3">Trail C</option>
+              </select>
+              <label>Upload to Gallery</label>
+            </div>
+            <!-- upload Images-->
+            <div class="file-field input-field col s12">
+              <div class="btn">
+                <span><i class="fas fa-cloud-upload-alt"></i></span>
+                <input type="file" multiple />
+              </div>
+              <div class="file-path-wrapper">
+                <input
+                  class="file-path validate"
+                  type="text"
+                  placeholder="Upload images"
+                />
+              </div>
+            </div>
+            <!-- Submit Btn-->
+            <div class="">
+              <a
+                href="#!"
+                class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
+                >Upload Images</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="owl-carousel">
       <img
         class="hiker-gallery-img materialboxed"
