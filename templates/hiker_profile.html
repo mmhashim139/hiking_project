@@ -657,66 +657,42 @@
     <div class="sign-up-btn">
       <a
         class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-        href="#modal1"
+        href="#signupform"
         >Sign Up</a
       >
     </div>
     <!-- Sign up Modal Form -->
-    <div id="modal1" class="modal">
+    <div id="signupform" class="modal">
       <div class="modal-content">
         <div class="modal-header">Join HIKINIE</div>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" method="POST" action="{{ url_for('signup') }}">
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Name"
-                  id="first_name"
-                  type="text"
-                  class="validate"
-                />
-                <label for="first_name">Name</label>
+                <input placeholder="Name" id="name" name="name" type="text" class="validate"/>
+                <label for="name">Name</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Email"
-                  id="email"
-                  type="email"
-                  class="validate"
-                />
+                <input placeholder="Email" id="email" name="email" type="email" class="validate"/>
                 <label for="email">Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="password"
-                  id="password"
-                  type="password"
-                  class="validate"
-                />
+                <input placeholder="password" id="password" name="password" type="password" class="validate"/>
                 <label for="password">Password</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Confirm Password"
-                  id="password_confirmation"
-                  type="password"
-                  class="validate"
-                />
+                <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" />
                 <label for="password_confirmation">Confirm Password</label>
               </div>
             </div>
             <div class="sign-up-btn">
-              <a
-                href="#!"
-                class="modal-close waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-                >Sign Up</a
-              >
+              <button type="submit" class="modal-close waves-effect waves-light btn deep-orange lighten-2 modal-trigger">Sign Up</button>
             </div>
             <a class="modal-close modal-trigger" href="#modal2"
               >Already Signed ..Login here
