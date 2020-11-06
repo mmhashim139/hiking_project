@@ -81,7 +81,12 @@ $(document).ready(function(){
     $('.tooltipped').tooltip();
   });
         
-
+// Initialize Collapsible
     $(document).ready(function(){
     $('.collapsible').collapsible();
+  });
+
+  // Initialize form Selector 
+    $(document).ready(function(){
+    $('select').formSelect();
   });
