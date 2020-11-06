@@ -43,14 +43,98 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe vel
         tempore hic corrupti corporis laborum?
       </p>
-       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Profile"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+      <a
+        href="#profile_edit"
+        class="tooltipped modal-trigger"
+        data-position="bottom"
+        data-tooltip="Edit Profile"
+        ><span class="hiker-state-value"><i class="far fa-edit"></i></span
+      ></a>
+      <!-- Edit Profile Form-->
+      <div id="profile_edit" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <form class="col s12">
+              <!-- Name input-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <input
+                    placeholder="Name"
+                    id="first_name"
+                    type="text"
+                    class="validate"
+                  />
+                  <label for="first_name">Name</label>
+                </div>
+              </div>
+              <!-- Bio input-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea
+                    id="textarea1"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label for="hiker-bio">Bio</label>
+                </div>
+              </div>
+              <!-- Social Links-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="" type="text" class="validate" />
+                  <label for="icon_prefix"><i class="fab fa-facebook"></i>  Facebook link</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="" type="text" class="validate" />
+                  <label for="icon_prefix"><i class="fab fa-instagram"></i>  Instagram link</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="" type="text" class="validate" />
+                  <label for="icon_prefix"><i class="fab fa-twitter-square"></i>  Twitter link</label>
+                </div>
+              </div>
+              <!-- upload profile picture-->
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span>Profile Picture</span>
+                  <input type="file" />
+                </div>
+                <div class="file-path-wrapper">
+                  <input
+                    class="file-path validate"
+                    placeholder="Upload Profile Picture"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <!-- Submit Btn-->
+            <div class="">
+              <a
+                href="#!"
+                class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
+                >Edit Profile</a
+              >
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <!-- Hiker Gallery section -->
 <section>
   <div class="container">
-    <h3 class="cta-header">{ name } Gallery     <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Add Image"><span class="hiker-state-value"><i class="far fa-plus-square"></i></span></a></h3>
+    <h3 class="cta-header">
+      { name } Gallery
+      <a
+        href="#"
+        class="tooltipped"
+        data-position="bottom"
+        data-tooltip="Add Image"
+        ><span class="hiker-state-value"
+          ><i class="far fa-plus-square"></i></span
+      ></a>
+    </h3>
 
     <div class="owl-carousel">
       <img
@@ -123,7 +207,14 @@
                 <a href="#">
                   <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
                 >
-                       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Trail"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+                <a
+                  href="#"
+                  class="tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Edit Trail"
+                  ><span class="hiker-state-value"
+                    ><i class="far fa-edit"></i></span
+                ></a>
               </div>
               <p class="place-review-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -183,7 +274,14 @@
                 <a href="#">
                   <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
                 >
-                       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Trail"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+                <a
+                  href="#"
+                  class="tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Edit Trail"
+                  ><span class="hiker-state-value"
+                    ><i class="far fa-edit"></i></span
+                ></a>
               </div>
               <p class="place-review-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -241,7 +339,14 @@
                 <a href="#">
                   <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
                 >
-                       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Trail"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+                <a
+                  href="#"
+                  class="tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Edit Trail"
+                  ><span class="hiker-state-value"
+                    ><i class="far fa-edit"></i></span
+                ></a>
               </div>
               <p class="place-review-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -299,7 +404,14 @@
                 <a href="#">
                   <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
                 >
-                       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Trail"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+                <a
+                  href="#"
+                  class="tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Edit Trail"
+                  ><span class="hiker-state-value"
+                    ><i class="far fa-edit"></i></span
+                ></a>
               </div>
               <p class="place-review-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -357,7 +469,14 @@
                 <a href="#">
                   <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
                 >
-                       <a href="#" class="tooltipped" data-position="bottom" data-tooltip="Edit Trail"><span class="hiker-state-value"><i class="far fa-edit"></i></span></a>
+                <a
+                  href="#"
+                  class="tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Edit Trail"
+                  ><span class="hiker-state-value"
+                    ><i class="far fa-edit"></i></span
+                ></a>
               </div>
               <p class="place-review-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -384,9 +503,12 @@
 
 <!-- Parallax  -->
 <div class="parallax-container">
-    <div class="parallax"><img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"></div>
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"
+    />
+  </div>
 </div>
-
 
 <!-- Other Hikers in HIKINIE-->
 <section class="hikers-section">
@@ -469,8 +591,10 @@
         </div>
       </div>
     </div>
-        <div class="more-div">
-        <a class="waves-effect waves-light btn deep-orange lighten-2" href="#">All Hikers</a>
+    <div class="more-div">
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="#"
+        >All Hikers</a
+      >
     </div>
   </div>
 </section>
@@ -599,9 +723,12 @@
 
 <!-- Parallax  -->
 <div class="parallax-container">
-    <div class="parallax"><img src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"></div>
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
+    />
+  </div>
 </div>
-
 
 <!-- More places -->
 
@@ -715,13 +842,19 @@
       </a>
     </div>
     <div class="more-div">
-        <a class="waves-effect waves-light btn deep-orange lighten-2" href="#">All Trails</a>
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="#"
+        >All Trails</a
+      >
     </div>
   </div>
 </section>
 
 <!-- Parallax  -->
 <div class="parallax-container">
-    <div class="parallax"><img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"></div>
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"
+    />
+  </div>
 </div>
 {% endblock %}
