@@ -5,7 +5,7 @@ from flask import (
     request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
@@ -48,6 +48,31 @@ def hiker_profile():
 @app.route("/place_page")
 def place_page():
     return render_template("place_page.html")
+
+
+# sign_up Function
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        # check if username already exists in db
+        # existing_user = mongo.db.users.find_one(
+        #     {"name": request.form.get("name").lower()})
+
+        # if existing_user:
+        #     # flash("Name already exists")
+        #     return redirect(url_for("signup"))
+
+        register = {
+            "name": request.form.get("name").lower(),
+            "email": request.form.get("email"),
+            "password": generate_password_hash(request.form.get("password"))
+            # Confirm password code here
+            }
+    mongo.db.users.insert_one(register)
+    # put the new user into 'session' cookie
+    session["user"] = request.form.get("name").lower()
+    # flash("Registration Successful!")
+    return render_template("thank_you.html")
 
 
 # make sure to debug= False before submit
