@@ -25,10 +25,10 @@ def home_page():
 
 
 # show All places in Hiking places page
-@app.route("/all_places")
-def all_places():
-    places = mongo.db.places.find()
-    return render_template("places.html", places=places)
+@app.route("/all_trails")
+def all_trails():
+    trails = mongo.db.trails.find()
+    return render_template("all_trails.html", trails=trails)
 
 
 # show All places in Hiking places page
@@ -45,9 +45,9 @@ def hiker_profile():
 
 
 # show Place page
-@app.route("/place_page")
-def place_page():
-    return render_template("place_page.html")
+@app.route("/trail_page")
+def trail_page():
+    return render_template("trail_page.html")
 
 
 # sign_up Function

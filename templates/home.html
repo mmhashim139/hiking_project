@@ -15,11 +15,11 @@
         alt="Header-slider-image-1"
       />
       <div class="caption center-align">
-        <h2>Best Places To Hike In Ireland</h2>
+        <h2>Best Trails To Hike In Ireland</h2>
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
           Lorem ipsum dolor sit amet consectetur
         </h5>
-        <a href="#" class="btn btn-large deep-orange lighten-2">See Places</a>
+        <a href="#" class="btn btn-large deep-orange lighten-2">See Trails</a>
       </div>
     </li>
     <li>
@@ -32,7 +32,7 @@
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
           Lorem ipsum dolor sit amet
         </h5>
-        <a href="#" class="btn btn-large deep-orange lighten-2">See Places</a>
+        <a href="#" class="btn btn-large deep-orange lighten-2">See Trails</a>
       </div>
     </li>
     <li>
@@ -64,16 +64,16 @@
   </ul>
 </section>
 
-{% endblock %} {% block places_cards %}
-<!-- Top Places cards 
-    This Section Shows a sample of places in the home page 
-    each place showed in card with image & details
+{% endblock %} {% block trails_cards %}
+<!-- Top trails cards 
+    This Section Shows a sample of trailss in the home page 
+    each trail showed in card with image & details
 -->
 <section>
-  <!-- Places cards Container-->
+  <!-- trails cards Container-->
   <div class="container">
     <h2 class="header">Best To HIKINIE</h2>
-    <!-- Place Card-->
+    <!-- Trail Card-->
     <div class="col s12 m7">
       <div class="card">
         <div class="row">
@@ -83,29 +83,29 @@
             />
           </div>
           <div class="card-content col s12 m8">
-            <div class="place-header">
+            <div class="trail-header">
               Carrauntoohil Mountain, MacGillycuddy’s Reeks
             </div>
             <div>
-              <span><i class="place-stars fas fa-star"></i></span>
-              <span><i class="place-stars fas fa-star"></i></span>
-              <span><i class="place-stars fas fa-star"></i></span>
-              <span><i class="place-stars fas fa-star-half-alt"></i></span>
-              <span><i class="place-stars far fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
+              <span><i class="trail-stars far fa-star"></i></span>
             </div>
-            <span class="place-county">Co. Kerry</span>
-            <span class="place-state-key">Length</span>
-            <span class="place-state-value">14.5 km</span>
-            <span class="place-state-key">Est. Time</span>
-            <span class="place-state-value">5.5 hours</span>
-            <div class="place-description-div">
-              <p class="place-description">
+            <span class="trail-county">Co. Kerry</span>
+            <span class="trail-state-key">Length</span>
+            <span class="trail-state-value">14.5 km</span>
+            <span class="trail-state-key">Est. Time</span>
+            <span class="trail-state-value">5.5 hours</span>
+            <div class="trail-description-div">
+              <p class="trail-description">
                 this travel offers multiple routes and is noted to be a
                 strenuous but rewarding walking route
               </p>
             </div>
-            <div class="place-action-div col s12">
-              <a class="btn deep-orange lighten-2 place-action-btn" href="{{ url_for('place_page') }}">See more ..</a>
+            <div class="trail-action-div col s12">
+              <a class="btn deep-orange lighten-2 trail-action-btn" href="{{ url_for('trail_page') }}">See more ..</a>
             </div>
           </div>
         </div>

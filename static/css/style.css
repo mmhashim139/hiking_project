@@ -14,34 +14,34 @@
     margin-top: 50px;
 }
 
-/* ======== Place Cards style ====== ===*/
-.place-header{
+/* ======== trail Cards style ====== ===*/
+.trail-header{
     color: rgba(0, 0, 0, 0.75);
     font-size: 18px;
     font-weight: 700;
 }
-.place-county {
+.trail-county {
     font-size: 14px;
     font-weight: 400;
     color: gray;
     display: flex;
     padding: 3px 0px;
 }
-.place-category {
+.trail-category {
     font-size: 16px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.75);
     padding: 0px 2px;
     display: flex;
 }
-.place-state-key  {
+.trail-state-key  {
     font-size: 14px;
     font-weight: 400;
     color: black;
     padding: 0px 2px;
 }
 
-.place-state-value {
+.trail-state-value {
     border: 1px solid rgb(255, 81, 28); 
     padding: 0px 5px;
     border-radius: 5px;
@@ -50,21 +50,21 @@
     color: black;
 }
 
-.place-description {
+.trail-description {
     font-size: 16px;
     font-weight: 400;
     color: gray;
     padding: 2px 0px;
 }
 
-.place-action-btn {
+.trail-action-btn {
     font-size: 14px;
     font-weight: 500;
     margin-left: 60% ;
     margin-bottom: 5px;
 }
 
-.place-stars {
+.trail-stars {
     color: rgb(255, 81, 28);
 }
 
@@ -192,13 +192,13 @@
 
 
 /*  Hiker Trails Card  */
-.place-review-header {
+.trail-review-header {
     color: rgba(0, 0, 0, 0.75);
     font-size: 16px;
     font-weight: 700;
 }
 
-.place-review-para{
+.trail-review-para{
     font-size: 16px;
     font-weight: 400;
     color: gray;
@@ -281,14 +281,9 @@
 
 
 
-/*  Place page  */
+/*  trail page  */
 
-.trail-header{
-  display: flex ;
-  height: 500px;
-}
-
-.trail-img{
+.trail-img {
     height: 400px;
     width: 100% ;
     display: block;
@@ -321,6 +316,6 @@
 .review-stars-div  {
 
 }
- .place-review-header{
+ .trail-review-header{
 
 }

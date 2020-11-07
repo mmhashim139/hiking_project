@@ -31,7 +31,7 @@
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="{{ url_for('home_page') }}">Home</a></li>
-					<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
+					<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 					<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
@@ -47,7 +47,7 @@
 				<h4 class="center-align brand-logo">HIKINIE</h4>
 			</li>
 			<li><a href="{{ url_for('home_page') }}">Home</a></li>
-			<li><a href="{{ url_for('all_places') }}">Hiking Places</a></li>
+			<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 			<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
 			<li><a href="#">My Account</a></li>
 			<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
@@ -62,12 +62,12 @@
 		{% endblock %}
 
 	</header>
-        <!-- All Place page-->
-        {% block allplaces %}
+        <!-- All Trail page-->
+        {% block alltrails %}
         {% endblock %}
 
-        <!-- Hiking Place page-->
-        {% block places_cards %}
+        <!-- Hiking Trail page-->
+        {% block trails_cards %}
         {% endblock %}
 
         <!-- Hikers cards -->
@@ -80,8 +80,8 @@
 
         {% endblock %}
 
-        <!-- place page-->
-        {% block place_page %}
+        <!-- Trail page-->
+        {% block trail_page %}
         {% endblock %}
 
     <!-- Thank You page page-->
@@ -95,7 +95,7 @@
 					<h5 class="white-text">HIKINIE</h5>
 					<ul>
 						<li><a class="white-text text-lighten-3" href="{{ url_for('home_page') }}">Home</a></li>
-                        <li><a class="white-text text-lighten-3" href="{{ url_for('all_places') }}">All Places</a></li>
+                        <li><a class="white-text text-lighten-3" href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
                         <li><a class="white-text text-lighten-3" href="{{ url_for('all_hikers') }}">Hikers</a></li>
 					</ul>
 				</div>
