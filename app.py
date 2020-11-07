@@ -75,6 +75,21 @@ def signup():
     return render_template("thank_you.html")
 
 
+# Edit Profile Function
+@app.route("/edit_profile", methods=["GET", "POST"])
+def edit_profile():
+    if request.method == "POST":
+        update = {
+            "profile_name": request.form.get("profile_name"),
+            "bio": request.form.get("hiker_bio"),
+            "facebook_link": request.form.get("facebook_link"),
+            "instagram_link": request.form.get("instagram_link"),
+            "twitter_link": request.form.get("twitter_link"),
+            }
+    mongo.db.users.insert_one(update)
+    return render_template("thank_you.html")
+
+
 # make sure to debug= False before submit
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
