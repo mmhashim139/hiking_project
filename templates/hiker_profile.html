@@ -48,79 +48,60 @@
         class="tooltipped modal-trigger"
         data-position="bottom"
         data-tooltip="Edit Profile"
-        ><span class="hiker-state-value"><i class="far fa-edit"></i></span
-      ></a>
+      >
+        <span class="hiker-state-value"><i class="far fa-edit"></i></span>
+      </a>
       <!-- Edit Profile Form-->
       <div id="profile_edit" class="modal">
         <div class="modal-content">
           <div class="row">
-            <form class="col s12">
-              <!-- Name input-->
+            <form class="col s12" method="POST" action="{{ url_for('edit_profile') }}">
+              <!-- Profile Name input-->
               <div class="row">
                 <div class="input-field col s12">
-                  <input
-                    placeholder="Name"
-                    id="first_name"
-                    type="text"
-                    class="validate"
-                  />
-                  <label for="first_name">Name</label>
+                  <input placeholder="Profile Name" id="profile_name" name="profile_name" type="text" class="validate"/>
+                  <label for="profile_name">Profile Name</label>
                 </div>
               </div>
               <!-- Bio input-->
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea
-                    id="textarea1"
-                    class="materialize-textarea"
-                  ></textarea>
-                  <label for="hiker-bio">Bio</label>
+                  <textarea id="hiker_bio" name="hiker_bio" class="materialize-textarea" ></textarea>
+                  <label for="hiker_bio">Bio</label>
                 </div>
               </div>
               <!-- Social Links-->
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"
-                    ><i class="fab fa-facebook"></i> Facebook link</label
-                  >
+                  <input id="facebook_link" name="facebook_link" type="text" class="validate" />
+                  <label for="facebook_link"><i class="fab fa-facebook"></i> Facebook link</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"
-                    ><i class="fab fa-instagram"></i> Instagram link</label
-                  >
+                  <input id="instagram_link" name="instagram_link" type="text" class="validate" />
+                  <label for="instagram_link"><i class="fab fa-instagram"></i> Instagram link</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="" type="text" class="validate" />
-                  <label for="icon_prefix"
+                  <input id="twitter_link" name="twitter_link" type="text" class="validate" />
+                  <label for="twitter_link"
                     ><i class="fab fa-twitter-square"></i> Twitter link</label
                   >
                 </div>
               </div>
               <!-- upload profile picture-->
               <div class="row">
-                  <div class="file-field input-field">
-                    <div class="btn">
-                      <span><i class="fas fa-cloud-upload-alt"></i></span>
-                      <input type="file" />
-                    </div>
-                    <div class="file-path-wrapper">
-                      <input
-                        class="file-path validate"
-                        placeholder="Upload Image"
-                        type="text"
-                      />
-                    </div>
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span><i class="fas fa-cloud-upload-alt"></i></span>
+                    <input type="file" />
                   </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" placeholder="Upload Image" type="text"/>
+                  </div>
+                </div>
               </div>
               <!-- Submit Btn-->
               <div class="row">
-                <a
-                  href="#!"
-                  class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
-                  >Edit Profile</a
-                >
+                <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Edit Profile</button>
               </div>
             </form>
           </div>
@@ -669,30 +650,59 @@
           <form class="col s12" method="POST" action="{{ url_for('signup') }}">
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="Name" id="name" name="name" type="text" class="validate"/>
+                <input
+                  placeholder="Name"
+                  id="name"
+                  name="name"
+                  type="text"
+                  class="validate"
+                />
                 <label for="name">Name</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="Email" id="email" name="email" type="email" class="validate"/>
+                <input
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="validate"
+                />
                 <label for="email">Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="password" id="password" name="password" type="password" class="validate"/>
+                <input
+                  placeholder="password"
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="validate"
+                />
                 <label for="password">Password</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" />
+                <input
+                  placeholder="Confirm Password"
+                  id="password2"
+                  name="password2"
+                  type="password"
+                  class="validate"
+                />
                 <label for="password_confirmation">Confirm Password</label>
               </div>
             </div>
             <div class="sign-up-btn">
-              <button type="submit" class="modal-close waves-effect waves-light btn deep-orange lighten-2 modal-trigger">Sign Up</button>
+              <button
+                type="submit"
+                class="modal-close waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
+              >
+                Sign Up
+              </button>
             </div>
             <a class="modal-close modal-trigger" href="#modal2"
               >Already Signed ..Login here
