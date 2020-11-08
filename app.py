@@ -54,13 +54,23 @@ def trail_page():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        # check if username already exists in db
-        # existing_user = mongo.db.users.find_one(
-        #     {"name": request.form.get("name").lower()})
+        # check if name / email already exists in database
+        existing_name = mongo.db.users.find_one(
+            {"name": request.form.get("name").lower()})
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email")})
 
-        # if existing_user:
-        #     # flash("Name already exists")
-        #     return redirect(url_for("signup"))
+        if existing_name:
+            flash("Sorry , Name already exists")
+            return render_template("thank_you.html")
+
+        elif existing_email:
+            flash("Sorry , Email already exists")
+            return render_template("thank_you.html")
+        # check if cpassword confirmation match
+        elif request.form.get("password") != request.form.get("password2"):
+            flash("Sorry , The password confirmation does not match")
+            return render_template("thank_you.html")
 
         register = {
             "name": request.form.get("name").lower(),
@@ -71,8 +81,8 @@ def signup():
     mongo.db.users.insert_one(register)
     # put the new user into 'session' cookie
     session["user"] = request.form.get("name").lower()
-    # flash("Registration Successful!")
-    return render_template("thank_you.html")
+    flash("Registration Successful!")
+    return render_template("thank_you.html")  # customize thanks page ??
 
 
 # Edit Profile Function
