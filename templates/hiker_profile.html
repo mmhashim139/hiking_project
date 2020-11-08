@@ -650,57 +650,32 @@
           <form class="col s12" method="POST" action="{{ url_for('signup') }}">
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Name"
-                  id="name"
-                  name="name"
-                  type="text"
-                  class="validate"
-                />
+                <input placeholder="Name" id="name" name="name" type="text" 
+                minlength="4" maxlength="25" class="validate" required />
                 <label for="name">Name</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Email"
-                  id="email"
-                  name="email"
-                  type="email"
-                  class="validate"
-                />
+                <input placeholder="Email" id="email" name="email" type="email"
+                 class="validate" required />
                 <label for="email">Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="password"
-                  id="password"
-                  name="password"
-                  type="password"
-                  class="validate"
-                />
+                <input placeholder="password" id="password" name="password" type="password" minlength="8" class="validate" required/>
                 <label for="password">Password</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input
-                  placeholder="Confirm Password"
-                  id="password2"
-                  name="password2"
-                  type="password"
-                  class="validate"
-                />
+                <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" required/>
                 <label for="password_confirmation">Confirm Password</label>
               </div>
             </div>
             <div class="sign-up-btn">
-              <button
-                type="submit"
-                class="modal-close waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-              >
+              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 modal-trigger">
                 Sign Up
               </button>
             </div>
@@ -747,7 +722,7 @@
                 >Login</a
               >
             </div>
-            <a class="modal-close modal-trigger" href="#modal1"
+            <a class=" modal-trigger" href="#signupform"
               >Not Signed yet .. sign up here
             </a>
           </form>
