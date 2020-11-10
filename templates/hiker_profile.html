@@ -11,7 +11,7 @@
         src="https://cdn.pixabay.com/photo/2010/12/23/13/06/climber-4048_960_720.jpg"
       />
     </div>
-    <div class="hiker-name">Hiker Name</div>
+    <div class="hiker-name">{{ name}}</div>
     <div class="hiker-state">
       <span class="hiker-state-key">Completed</span>
       <span class="hiker-state-value">3</span>
@@ -114,7 +114,7 @@
 <section>
   <div class="container">
     <h3 class="cta-header">
-      { name } Gallery
+      {{ name }} Gallery
       <a
         href="#upload_gla_img"
         class="tooltipped modal-trigger tooltipped"
@@ -199,7 +199,7 @@
 <!-- Hiker selected trails with review -->
 <section>
   <div class="container">
-    <h3 class="cta-header">{ name } trails</h3>
+    <h3 class="cta-header">{{ name }} trails</h3>
     <!-- Add for loop to inhert data drom hiker profile       ---------------------------------------------- -->
     <div class="col s12 m7">
       <div class="card">
