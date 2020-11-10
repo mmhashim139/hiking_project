@@ -33,10 +33,13 @@
 					<li><a href="{{ url_for('home_page') }}">Home</a></li>
 					<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 					<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
-					<li><a href="#">My Account</a></li>
-					<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
-					<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
-					<li><a class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
+                    {% if session.name %}
+			            <li><a href="#">My Account</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
+                    {% else %}
+			            <li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
+                        <li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
+                    {% endif %}	
 				</ul>
 			</div>
 		</nav>
@@ -49,10 +52,13 @@
 			<li><a href="{{ url_for('home_page') }}">Home</a></li>
 			<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 			<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
-			<li><a href="#">My Account</a></li>
-			<li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
-			<li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
-			<li><a class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
+                    {% if session.name %}
+			            <li><a href="#">My Account</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
+                    {% else %}
+			            <li><a class="waves-effect deep-orange lighten-2 btn">Log IN</a></li>
+                        <li><a class="waves-effect deep-orange lighten-2 btn">Sign Up</a></li>
+                    {% endif %}					    
 		</ul>
 
 		<!-- Header carousel slider Only in Home Page-->
