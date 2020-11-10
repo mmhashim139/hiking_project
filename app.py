@@ -44,6 +44,14 @@ def hiker_profile():
     return render_template("hiker_profile.html")
 
 
+# show Hiker profile page
+@app.route("/hiker_profile/<name>", methods=["GET", "POST"])
+def hiker_page(name):
+    name = mongo.db.users.find_one({"name": session["name"]})["name"]
+
+    return render_template("hiker_profile.html", name=name)
+
+
 # show Place page
 @app.route("/trail_page")
 def trail_page():
@@ -77,11 +85,13 @@ def signup():
             "email": request.form.get("email"),
             "password": generate_password_hash(request.form.get("password"))
             }
-    mongo.db.users.insert_one(register)
-    # put the new user into 'session' cookie
-    session["user"] = request.form.get("name").lower()
-    flash("Registration Successful!")
-    return render_template("thank_you.html")  # customize thanks page ??
+        mongo.db.users.insert_one(register)
+        # put the new user into 'session' cookie
+        session["name"] = request.form.get("name").lower()
+        flash("Registration Successful!")
+        return redirect(url_for("hiker_page", name=session["name"]))
+
+    return render_template("thank_you.html")
 
 
 # Login Function
@@ -97,7 +107,9 @@ def login():
             if check_password_hash(
                 existing_user["password"], request.form.get("login_password")):
                     session["email"] = request.form.get("login_email")
-                    flash("Welcome, {}".format(request.form.get("login_email")))
+                    # find a user name to dirct him to his profile
+                    session["name"] = mongo.db.users.find_one({"email": session["email"]})["name"]
+                    return redirect(url_for("hiker_page", name=session["name"]))
 
             else:
                 # invalid password match
