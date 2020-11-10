@@ -67,7 +67,7 @@ def signup():
         elif existing_email:
             flash("Sorry , Email already exists")
             return render_template("thank_you.html")
-        # check if cpassword confirmation match
+        # check if password confirmation match
         elif request.form.get("password") != request.form.get("password2"):
             flash("Sorry , The password confirmation does not match")
             return render_template("thank_you.html")
@@ -76,13 +76,40 @@ def signup():
             "name": request.form.get("name").lower(),
             "email": request.form.get("email"),
             "password": generate_password_hash(request.form.get("password"))
-            # Confirm password code here
             }
     mongo.db.users.insert_one(register)
     # put the new user into 'session' cookie
     session["user"] = request.form.get("name").lower()
     flash("Registration Successful!")
     return render_template("thank_you.html")  # customize thanks page ??
+
+
+# Login Function
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # check if email exists in db
+        existing_user = mongo.db.users.find_one(
+            {"email": request.form.get("login_email")})
+
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                existing_user["password"], request.form.get("login_password")):
+                    session["email"] = request.form.get("login_email")
+                    flash("Welcome, {}".format(request.form.get("login_email")))
+
+            else:
+                # invalid password match
+                flash("Incorrect Username and/or Password")
+                return render_template("thank_you.html")
+
+        else:
+            # username doesn't exist
+            flash("Incorrect Username and/or Password")
+            return render_template("thank_you.html")
+
+    return render_template("thank_you.html")
 
 
 # Edit Profile Function
