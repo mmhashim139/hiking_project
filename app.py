@@ -48,7 +48,6 @@ def hiker_profile():
 @app.route("/hiker_profile/<name>", methods=["GET", "POST"])
 def hiker_page(name):
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
-
     return render_template("hiker_profile.html", name=name)
 
 
@@ -124,6 +123,14 @@ def login():
     return render_template("thank_you.html")
 
 
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    session.pop("name")
+    flash("You have been logged out")
+    return render_template("thank_you.html")
+
+
 # Edit Profile Function
 @app.route("/edit_profile", methods=["GET", "POST"])
 def edit_profile():
@@ -137,6 +144,7 @@ def edit_profile():
             }
     mongo.db.users.insert_one(update)
     return render_template("thank_you.html")
+
 
 
 # make sure to debug= False before submit
