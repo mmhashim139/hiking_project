@@ -68,15 +68,15 @@ def signup():
             {"email": request.form.get("email")})
 
         if existing_name:
-            flash("Sorry , Name already exists")
+            flash("Sorry , Name already exists , try again")
             return render_template("thank_you.html")
 
         elif existing_email:
-            flash("Sorry , Email already exists")
+            flash("Sorry , Email already exists, try again")
             return render_template("thank_you.html")
         # check if password confirmation match
         elif request.form.get("password") != request.form.get("password2"):
-            flash("Sorry , The password confirmation does not match")
+            flash("Sorry , The password confirmation does not match, try again")
             return render_template("thank_you.html")
 
         register = {
@@ -87,9 +87,8 @@ def signup():
         mongo.db.users.insert_one(register)
         # put the new user into 'session' cookie
         session["name"] = request.form.get("name").lower()
-        flash("Registration Successful!")
-        return redirect(url_for("hiker_page", name=session["name"]))
-
+        flash("Welcome, {}".format(request.form.get("name")))
+        return render_template("thank_you.html")
     return render_template("thank_you.html")
 
 
@@ -108,16 +107,17 @@ def login():
                     session["email"] = request.form.get("login_email")
                     # find a user name to dirct him to his profile
                     session["name"] = mongo.db.users.find_one({"email": session["email"]})["name"]
-                    return redirect(url_for("hiker_page", name=session["name"]))
+                    flash("Welcome, {}".format(session["name"]))
+                    return render_template("thank_you.html")
 
             else:
                 # invalid password match
-                flash("Incorrect Username and/or Password")
+                flash("Sorry, Incorrect Username and/or Password , try again")
                 return render_template("thank_you.html")
 
         else:
             # username doesn't exist
-            flash("Incorrect Username and/or Password")
+            flash("Sorry, Incorrect Username and/or Password , try again")
             return render_template("thank_you.html")
 
     return render_template("thank_you.html")
