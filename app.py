@@ -142,17 +142,27 @@ def logout():
 # Edit Profile Function
 @app.route("/edit_profile", methods=["GET", "POST"])
 def edit_profile():
+    hiker = mongo.db.users.find_one({"name": session["name"]})
+    name = session["name"]
     if request.method == "POST":
-        update = {
-            "profile_name": request.form.get("profile_name"),
-            "bio": request.form.get("hiker_bio"),
-            "facebook_link": request.form.get("facebook_link"),
-            "instagram_link": request.form.get("instagram_link"),
-            "twitter_link": request.form.get("twitter_link"),
-            }
-    mongo.db.users.insert_one(update)
-    return render_template("thank_you.html")
+        profile_name = request.form.get("profile_name")
+        bio = request.form.get("hiker_bio")
+        facebook_link = request.form.get("facebook_link")
+        instagram_link = request.form.get("instagram_link")
+        twitter_link = request.form.get("twitter_link")
+    # To update only edited values , code insbired from stack overflow answer https://stackoverflow.com/a/24824812/14122351
+    # and refrence in mongodb https://docs.mongodb.com/manual/reference/operator/aggregation/cond/
+    mongo.db.users.update_many(
+        {"name": session["name"]}, [{"$set":{
+            "profile_name": {"$cond": [{"$eq": [profile_name, ""]}, "hiker.profile_name" , profile_name]},
+            "bio": {"$cond": [{"$eq": [bio, ""]}, "hiker.bio" , bio]},
+            "facebook_link": {"$cond": [{"$eq": [facebook_link, ""]}, "hiker.facebook_link" , facebook_link]},
+            "instagram_link": {"$cond": [{"$eq": [instagram_link, ""]}, "hiker.instagram_link" , instagram_link]},
+            "twitter_link": {"$cond": [{"$eq": [twitter_link, ""]}, "hiker.twitter_link" , twitter_link]},
+        }}], upsert=True)
+    return redirect(url_for("hiker_page", name=name))
 
+    
 
 
 # make sure to debug= False before submit
