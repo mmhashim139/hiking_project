@@ -34,7 +34,7 @@
 					<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 					<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
                     {% if session.name %}
-			            <li><a href="#">My Account</a></li>
+			            <li><a href="{{ url_for('hiker_page', name= session.name) }}">My Account</a></li>
                         <li><a href="{{ url_for('logout') }}" class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
                     {% else %}
 			            <li><a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a></li>
@@ -130,7 +130,7 @@
 			<li><a href="{{ url_for('all_trails') }}">Hiking Trails</a></li>
 			<li><a href="{{ url_for('all_hikers') }}">Hikers</a></li>
                     {% if session.name %}
-			            <li><a href="#">My Account</a></li>
+			            <li><a href="{{ url_for('hiker_page', name= session.name) }}">My Account</a></li>
                         <li><a href="{{ url_for('logout') }}" class="waves-effect deep-orange lighten-2 btn">Log Out</a></li>
                     {% else %}
 			            <li><a href="#login_modal_main" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a></li>
