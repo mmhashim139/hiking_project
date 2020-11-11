@@ -48,7 +48,8 @@ def hiker_profile():
 @app.route("/hiker_profile/<name>", methods=["GET", "POST"])
 def hiker_page(name):
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
-    return render_template("hiker_profile.html", name=name)
+    hiker = mongo.db.users.find_one({"name": session["name"]})
+    return render_template("hiker_profile.html", name=name, hiker=hiker)
 
 
 # show Place page
@@ -82,7 +83,14 @@ def signup():
         register = {
             "name": request.form.get("name").lower(),
             "email": request.form.get("email"),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            # Add default profile data for new user
+            "profile_name": request.form.get("name"),
+            "profile_img": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+            "bio": "",
+            "facebook_link": "https://www.facebook.com/",
+            "instagram_link": "https://www.instagram.com/",
+            "twitter_link": "https://twitter.com/",
             }
         mongo.db.users.insert_one(register)
         # put the new user into 'session' cookie
