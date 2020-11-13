@@ -19,7 +19,7 @@
     <div class="col s12 m6 offset-m3 l4 offset-l4 card-panel">
         <div class="container center-align">
             <div class="cta-header">Update your Account</div>
-                <a href="{{ url_for('hiker_page', name= session.name) }}" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">My Account</a>
+                <a href="{{ url_for('my_account', name= session.name) }}" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">My Account</a>
             <div class="cta-header">Explore HIKINIE</div>
             <a href="{{ url_for('home_page') }}" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">HIKINIE</a>
         </div>
@@ -31,7 +31,10 @@
         <div class="container center-align">
             <a href="#login_modal_main" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
             <a href="#signupform-main" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">Sign Up</a>
+            <div class="cta-header">Explore HIKINIE</div>
+            <a href="{{ url_for('home_page') }}" class="sidenav-close waves-effect deep-orange lighten-2 btn modal-trigger">HIKINIE</a>
         </div>
+
     </div>
     </div>
     {% endif %}	
