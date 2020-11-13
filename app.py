@@ -45,9 +45,9 @@ def hiker_profile(hiker_id):
     return render_template("hiker_profile.html", hiker=hiker)
 
 
-# show Hiker profile page for loged in user 
+# show Hiker profile page for logedIn user
 @app.route("/hiker_page/<name>", methods=["GET", "POST"])
-def hiker_page(name):
+def my_account(name):
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
     hiker = mongo.db.users.find_one({"name": session["name"]})
     return render_template("hiker_profile.html", name=name, hiker=hiker)
@@ -161,7 +161,7 @@ def edit_profile():
             "instagram_link": {"$cond": [{"$eq": [instagram_link, ""]}, hiker["instagram_link"], instagram_link]},
             "twitter_link": {"$cond": [{"$eq": [twitter_link, ""]}, hiker["twitter_link"], twitter_link]},
         }}], upsert=True)
-    return redirect(url_for("hiker_page", name=name))
+    return redirect(url_for("my_account", name=name))
 
     
 
