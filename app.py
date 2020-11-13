@@ -34,18 +34,19 @@ def all_trails():
 # show All places in Hiking places page
 @app.route("/all_hikers")
 def all_hikers():
-    hikers = mongo.db.users.find()
+    hikers = list(mongo.db.users.find())
     return render_template("hikers.html", hikers=hikers)
 
 
 # show Hiker profile page
-@app.route("/hiker_profile")
-def hiker_profile():
-    return render_template("hiker_profile.html")
+@app.route("/hiker_profile/<hiker_id>", methods=["GET", "POST"])
+def hiker_profile(hiker_id):
+    hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
+    return render_template("hiker_profile.html", hiker=hiker)
 
 
-# show Hiker profile page
-@app.route("/hiker_profile/<name>", methods=["GET", "POST"])
+# show Hiker profile page for loged in user 
+@app.route("/hiker_page/<name>", methods=["GET", "POST"])
 def hiker_page(name):
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
     hiker = mongo.db.users.find_one({"name": session["name"]})
