@@ -21,7 +21,8 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def home_page():
-    return render_template("home.html")
+    hikers = list(mongo.db.users.find())
+    return render_template("home.html", hikers=hikers)
 
 
 # show All places in Hiking places page
