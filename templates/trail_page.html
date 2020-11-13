@@ -39,7 +39,41 @@
           {{ trail.description }}
           </p>
         </div>
-        <a class="btn deep-orange lighten-2" href="#">Add a trail</a>
+        <!-- ======================================================================================= -->
+        <a href="#add_trail" class=" modal-trigger" >
+        <span class="hiker-state-value"> Add the Trail <i class="fas fa-plus-circle"></i></span>
+      </a>
+      <!-- "Add a trail" form -->
+        <div id="add_trail" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <form class="col s12" method="POST" action="{{ url_for('add_trail', trail_id=trail._id) }}">
+                        <!-- Trail Status-->
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <p>
+                                <label >
+                                <input name="trail_status" id="planning" value="planning" type="radio" />
+                                <span>Add to plan</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label >
+                                <input name="trail_status" id="completed" value="completed" type="radio" />
+                                <span>Mark as completed</span>
+                                </label>
+                            </p>
+                            </div>
+                        </div>
+                        <!-- Submit Btn-->
+                        <div class="row">
+                            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Add a Trail</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- ======================================================================================= -->
       </div>
       <div class="col s12 m6">
         <img
