@@ -5,15 +5,16 @@
     <div class="trail-header">
       <img
         class="trail-img"
-        src="https://cdn.pixabay.com/photo/2014/11/21/03/26/scotland-540119_960_720.jpg"
+        src="{{ trail.trail_image }}"
       />
     </div>
     <div class="row">
       <div class="col s12 m6">
         <div class="trail-header">
-          Carrauntoohil Mountain, MacGillycuddy’s Reeks
+          {{ trail.trail_name }}
         </div>
-        <span class="trail-county">Co. Kerry</span>
+        <span class="trail-county">{{ trail.trail_county }}</span>
+        <span class="trail-category">{{ trail.trail_category }}</span>
         <div>
           <span><i class="trail-stars fas fa-star"></i></span>
           <span><i class="trail-stars fas fa-star"></i></span>
@@ -29,14 +30,13 @@
         </div>
         <div>
           <span class="trail-state-key">Length</span>
-          <span class="trail-state-value">14.5 km</span>
+          <span class="trail-state-value">{{ trail.length }}</span>
           <span class="trail-state-key">Est. Time</span>
-          <span class="trail-state-value">5.5 hours</span>
+          <span class="trail-state-value">{{ trail.est_time }}</span>
         </div>
         <div class="trail-description-div">
           <p class="trail-description">
-            this travel offers multiple routes and is noted to be a strenuous
-            but rewarding walking route
+          {{ trail.description }}
           </p>
         </div>
         <a class="btn deep-orange lighten-2" href="#">Add a trail</a>
