@@ -154,11 +154,11 @@ def edit_profile():
     # and refrence in mongodb https://docs.mongodb.com/manual/reference/operator/aggregation/cond/
     mongo.db.users.update_many(
         {"name": session["name"]}, [{"$set":{
-            "profile_name": {"$cond": [{"$eq": [profile_name, ""]}, "hiker.profile_name" , profile_name]},
-            "bio": {"$cond": [{"$eq": [bio, ""]}, "hiker.bio" , bio]},
-            "facebook_link": {"$cond": [{"$eq": [facebook_link, ""]}, "hiker.facebook_link" , facebook_link]},
-            "instagram_link": {"$cond": [{"$eq": [instagram_link, ""]}, "hiker.instagram_link" , instagram_link]},
-            "twitter_link": {"$cond": [{"$eq": [twitter_link, ""]}, "hiker.twitter_link" , twitter_link]},
+            "profile_name": {"$cond": [{"$eq": [profile_name, ""]}, hiker["profile_name"], profile_name]},
+            "bio": {"$cond": [{"$eq": [bio, ""]}, hiker["bio"], bio]},
+            "facebook_link": {"$cond": [{"$eq": [facebook_link, ""]}, hiker["facebook_link"], facebook_link]},
+            "instagram_link": {"$cond": [{"$eq": [instagram_link, ""]}, hiker["instagram_link"], instagram_link]},
+            "twitter_link": {"$cond": [{"$eq": [twitter_link, ""]}, hiker["twitter_link"], twitter_link]},
         }}], upsert=True)
     return redirect(url_for("hiker_page", name=name))
 
