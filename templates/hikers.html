@@ -5,25 +5,25 @@
   <div class="container">
     <h2 class="header">Hikers in HIKINIE</h2>
     <div class="row">
-      {% for user in hikers %}
+      {% for hiker in hikers %}
       <div class="card hiker-card col s12 m4">
         <div>
           <img class="hiker-card-img"
-            src="{{ user.profile_img }}"
+            src="{{ hiker.profile_img }}"
           />
         </div>
-        <div class="hiker-name">{{ user.name }}</div>
+        <div class="hiker-name">{{ hiker.name }}</div>
         <div class="hiker-state">
           <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">{{ user.completed }}</span>
+          <span class="hiker-state-value">{{ hiker.completed }}</span>
           <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">{{ user.planing }}</span>
+          <span class="hiker-state-value">{{ hiker.planing }}</span>
         </div>
         <div class="card-content hiker-bio">
-          <p>{{ user.bio }}</p>
+          <p>{{ hiker.bio }}</p>
         </div>
         <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile') }}">Visit Profile</a>
+          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile', hiker_id=hiker._id) }}">Visit Profile</a>
         </div>
       </div>
       {% endfor %}
