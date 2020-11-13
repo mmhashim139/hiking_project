@@ -22,13 +22,14 @@ mongo = PyMongo(app)
 @app.route("/")
 def home_page():
     hikers = list(mongo.db.users.find())
-    return render_template("home.html", hikers=hikers)
+    trails = list(mongo.db.trails.find())
+    return render_template("home.html", hikers=hikers, trails=trails)
 
 
 # show All places in Hiking places page
 @app.route("/all_trails")
 def all_trails():
-    trails = mongo.db.trails.find()
+    trails = list(mongo.db.trails.find())
     return render_template("all_trails.html", trails=trails)
 
 
@@ -55,9 +56,10 @@ def my_account(name):
 
 
 # show Place page
-@app.route("/trail_page")
-def trail_page():
-    return render_template("trail_page.html")
+@app.route("/trail_page/<trail_id>", methods=["GET", "POST"])
+def trail_page(trail_id):
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail)
 
 
 # sign_up Function
