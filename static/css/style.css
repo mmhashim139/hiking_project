@@ -81,6 +81,10 @@
     border: 1px solid rgba(255, 81, 28, 0.05); 
 }
 
+.hiker-card:hover{
+    transform: scale(1.01);
+}
+
 .owl-carousel .owl-item img , .hiker-card-img {
     height: 150px;
     width: 50%;
@@ -123,6 +127,8 @@
     color: rgba(0, 0, 0, 0.75);
     padding: 2px 0px;
     text-align: center;
+    height:150px;
+    overflow:hidden;
 }
 
 .hiker-card-act {
