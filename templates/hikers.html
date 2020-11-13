@@ -6,7 +6,8 @@
     <h2 class="header">Hikers in HIKINIE</h2>
     <div class="row">
       {% for hiker in hikers %}
-      <div class="card hiker-card col s12 m4">
+      <div class="col s12 m4">
+      <div class="card hiker-card">
         <div>
           <img class="hiker-card-img"
             src="{{ hiker.profile_img }}"
@@ -25,6 +26,7 @@
         <div class="card-action hiker-card-act">
           <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile', hiker_id=hiker._id) }}">Visit Profile</a>
         </div>
+      </div>
       </div>
       {% endfor %}
     </div>
