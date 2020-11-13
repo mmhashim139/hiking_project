@@ -166,7 +166,22 @@ def edit_profile():
         }}], upsert=True)
     return redirect(url_for("my_account", name=name))
 
-    
+
+# Add a trail route , Hiker will add a trail to his collection
+@app.route("/add_trail/<trail_id>", methods=["GET", "POST"])
+def add_trail(trail_id):
+    if request.method == "POST":
+        trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+        newtrail = {
+            "trail_id": trail_id,
+            "hiker": mongo.db.users.find_one({"name": session["name"]}),
+            "trail_status": request.form.get("trail_status"),
+            }
+    mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails": 
+    {"trail_id": newtrail["trail_id"], 
+    "trail_status": newtrail["trail_status"]
+    }}})
+    return render_template("thank_you.html")
 
 
 # make sure to debug= False before submit
