@@ -167,21 +167,48 @@ def edit_profile():
     return redirect(url_for("my_account", name=name))
 
 
-# Add a trail route , Hiker will add a trail to his collection
-@app.route("/add_trail/<trail_id>", methods=["GET", "POST"])
-def add_trail(trail_id):
+# Add a trail to planned trails
+@app.route("/planning_trail/<trail_id>", methods=["GET", "POST"])
+def planning_trail(trail_id):
     if request.method == "POST":
         trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
         newtrail = {
             "trail_id": trail_id,
-            "hiker": mongo.db.users.find_one({"name": session["name"]}),
-            "trail_status": request.form.get("trail_status"),
+            "trail_status": "planning",
+            "plan_post": request.form.get("plan_post")
             }
-    mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails": 
-    {"trail_id": newtrail["trail_id"], 
-    "trail_status": newtrail["trail_status"]
-    }}})
-    return render_template("thank_you.html")
+    mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
+        {"trail_id": newtrail["trail_id"],
+        "trail_status": newtrail["trail_status"],
+        "plan_post" : newtrail["plan_post"]
+        }}})
+    flash("Trail Added to your plan")
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail)
+
+
+# Add a trail to completed trails
+@app.route("/completed_trail/<trail_id>", methods=["GET", "POST"])
+def completed_trail(trail_id):
+    if request.method == "POST":
+        trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+        newtrail = {
+            "trail_id": trail_id,
+            "trail_status": "completed",
+            "review_header": request.form.get("review_header"),
+            "review_rating": request.form.get("review_rating"),
+            "review_post": request.form.get("review_post")
+            }
+    mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
+        {"trail_id": newtrail["trail_id"],
+        "trail_status": newtrail["trail_status"],
+        "review_header" : newtrail["review_header"],
+        "review_rating" : newtrail["review_rating"],
+        "review_post" : newtrail["review_post"]
+        }}})
+    flash("Trail Marked as Completed")
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail)
 
 
 # make sure to debug= False before submit
