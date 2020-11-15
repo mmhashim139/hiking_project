@@ -55,14 +55,18 @@ def my_account(name):
     return render_template("hiker_profile.html", name=name, hiker=hiker)
 
 
+# get user data into reviews section
+@app.route("/get_user/<id>")
+def get_user(id):
+    return mongo.db.users.find_one({"_id": ObjectId(id)})
+
+
 # show Trail page
 @app.route("/trail_page/<trail_id>", methods=["GET", "POST"])
 def trail_page(trail_id):
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    # post_by = mongo.db.reviews.find_one({"trail_id": ObjectId(trail_id)})["post_by"]
-    # hiker = mongo.db.users.find({"_id": ObjectId(post_by)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
 
 
 # sign_up Function
@@ -170,7 +174,7 @@ def edit_profile():
     return redirect(url_for("my_account", name=name))
 
 
-# Add a trail to planned trails
+# Add a trail to planned trails with post
 @app.route("/planning_trail/<trail_id>", methods=["GET", "POST"])
 def planning_trail(trail_id):
     if request.method == "POST":
@@ -193,7 +197,7 @@ def planning_trail(trail_id):
     flash("Trail Added to your plan")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
 
 
 # Add a trail to completed trails
@@ -221,7 +225,29 @@ def completed_trail(trail_id):
     flash("Trail Marked as Completed")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+
+
+# add comment to review
+@app.route("/add_comment/<review_id>/<trail_id>", methods=["GET", "POST"])
+def add_comment(review_id, trail_id):
+    if request.method == "POST":
+        review_id = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})["_id"]
+        hiker = mongo.db.users.find_one({"name": session["name"]})["_id"]
+        new_comment = {
+            "comment_by" : hiker,
+            "comment_post" : request.form.get("comment_post") 
+        }
+    mongo.db.reviews.update({"_id": review_id}, {"$push": {"comments":
+        {"comment_by": new_comment["comment_by"],
+        "comment_post": new_comment["comment_post"]
+        }}})
+    flash("Comment added successfully")
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+
+
 
 
 # make sure to debug= False before submit
