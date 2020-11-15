@@ -1,4 +1,17 @@
 {% extends "base.html" %} {% block trail_page %}
+<section>
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="row  ">
+                    <h4 class=" deep-orange-text text-darken-2 center-align ">{{ message }}</h4>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+ </section>
+
 <!-- trail Header -->
 <section>
   <div class="container">
@@ -42,34 +55,75 @@
         <!-- ======================================================================================= -->
         <a href="#add_trail" class=" modal-trigger" >
         <span class="hiker-state-value"> Add the Trail <i class="fas fa-plus-circle"></i></span>
-      </a>
+        </a>
       <!-- "Add a trail" form -->
         <div id="add_trail" class="modal">
             <div class="modal-content">
                 <div class="row">
-                    <form class="col s12" method="POST" action="{{ url_for('add_trail', trail_id=trail._id) }}">
-                        <!-- Trail Status-->
-                        <div class="row">
-                            <div class="input-field col s12">
-                            <p>
-                                <label >
-                                <input name="trail_status" id="planning" value="planning" type="radio" />
-                                <span>Add to plan</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label >
-                                <input name="trail_status" id="completed" value="completed" type="radio" />
-                                <span>Mark as completed</span>
-                                </label>
-                            </p>
-                            </div>
+                <!-- Only loged in user can add a trail , if not redirct to login form-->
+                {% if session.name %}
+                <!-- Add a trail to plan or mark as completed-->
+                <a href="#planning_trail" class="modal-close modal-trigger" >
+                <span class="hiker-state-value"> Add to Plan <i class="fas fa-plus-circle"></i></span>
+                </a>
+                <a href="#completed_trail" class="modal-close modal-trigger" >
+                <span class="hiker-state-value"> Mark as completed <i class="fas fa-plus-circle"></i></span>
+                </a>
+                {% else %}
+                    <div>you need to login to add the Trail</div>
+                    <a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Add to plan Modal  -->
+        <div id="planning_trail" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                <form class="col s12" method="POST" action="{{ url_for('planning_trail', trail_id=trail._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="plan_post" name="plan_post" class="materialize-textarea"></textarea>
+                            <label for="plan_post">Write about your plan ..</label>
                         </div>
-                        <!-- Submit Btn-->
-                        <div class="row">
-                            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Add a Trail</button>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <!-- Mark as completed Modal -->
+        <div id="completed_trail" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                <form class="col s12" method="POST" action="{{ url_for('completed_trail', trail_id=trail._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="review_header" name="review_header" type="text" class="validate">
+                            <label for="review_header">Review Header </label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <!-- Rating Stars -->
+                            <input id="review_rating" name="review_rating" type="text" class="validate">
+                            <label for="review_rating">rating</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="review_post" name="review_post" class="materialize-textarea"></textarea>
+                            <label for="review_post">Write your review </label>
+                        </div>
+                    </div>
+                    <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
