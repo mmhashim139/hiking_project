@@ -172,8 +172,10 @@ def edit_profile():
 def planning_trail(trail_id):
     if request.method == "POST":
         trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+        hiker = mongo.db.users.find_one({"name": session["name"]})["_id"]
         newtrail = {
             "trail_id": trail_id,
+            "post_by": hiker,
             "trail_status": "planning",
             "plan_post": request.form.get("plan_post")
             }
@@ -182,6 +184,7 @@ def planning_trail(trail_id):
         "trail_status": newtrail["trail_status"],
         "plan_post" : newtrail["plan_post"]
         }}})
+    mongo.db.reviews.insert_one(newtrail)
     flash("Trail Added to your plan")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     return render_template("trail_page.html", trail=trail)
@@ -192,8 +195,10 @@ def planning_trail(trail_id):
 def completed_trail(trail_id):
     if request.method == "POST":
         trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+        hiker = mongo.db.users.find_one({"name": session["name"]})["_id"]
         newtrail = {
             "trail_id": trail_id,
+            "post_by": hiker,
             "trail_status": "completed",
             "review_header": request.form.get("review_header"),
             "review_rating": request.form.get("review_rating"),
@@ -206,6 +211,7 @@ def completed_trail(trail_id):
         "review_rating" : newtrail["review_rating"],
         "review_post" : newtrail["review_post"]
         }}})
+    mongo.db.reviews.insert_one(newtrail)
     flash("Trail Marked as Completed")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     return render_template("trail_page.html", trail=trail)
