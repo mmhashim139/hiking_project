@@ -55,11 +55,14 @@ def my_account(name):
     return render_template("hiker_profile.html", name=name, hiker=hiker)
 
 
-# show Place page
+# show Trail page
 @app.route("/trail_page/<trail_id>", methods=["GET", "POST"])
 def trail_page(trail_id):
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail)
+    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
+    # post_by = mongo.db.reviews.find_one({"trail_id": ObjectId(trail_id)})["post_by"]
+    # hiker = mongo.db.users.find({"_id": ObjectId(post_by)})
+    return render_template("trail_page.html", trail=trail, reviews=reviews)
 
 
 # sign_up Function
@@ -177,17 +180,20 @@ def planning_trail(trail_id):
             "trail_id": trail_id,
             "post_by": hiker,
             "trail_status": "planning",
+            "plan_header": request.form.get("plan_header"),
             "plan_post": request.form.get("plan_post")
             }
     mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
         {"trail_id": newtrail["trail_id"],
         "trail_status": newtrail["trail_status"],
+        "plan_header": newtrail["plan_header"],
         "plan_post" : newtrail["plan_post"]
         }}})
     mongo.db.reviews.insert_one(newtrail)
     flash("Trail Added to your plan")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail)
+    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail, reviews=reviews)
 
 
 # Add a trail to completed trails
@@ -214,7 +220,8 @@ def completed_trail(trail_id):
     mongo.db.reviews.insert_one(newtrail)
     flash("Trail Marked as Completed")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail)
+    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
+    return render_template("trail_page.html", trail=trail, reviews=reviews)
 
 
 # make sure to debug= False before submit
