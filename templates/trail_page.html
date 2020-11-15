@@ -192,7 +192,7 @@
                     class="review-card-img"
                     src="https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F191109234431-california-hiker-mountain-top.jpg"
                   />
-                  <div class="hiker-name">{{ review.post_by }}</div>
+                  <div class="hiker-name">{{ get_user(review.post_by).name }}</div>
                   <div class="hiker-state">
                     <span class="hiker-state-key">Completed</span>
                     <span class="hiker-state-value">4</span>
@@ -232,15 +232,19 @@
                     {{ review.plan_post }}
                   </p>
                 {% endif %}
-                  <a class="btn deep-orange lighten-2 trail-action-btn"
-                    >comments <i class="fas fa-caret-down"></i
-                  ></a>
+                {% if review.comments %}
+                  <a class="btn deep-orange lighten-2 trail-action-btn">
+                  comments <i class="fas fa-caret-down"></i></a>
+                {% else %}
+                <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment">Add comment </a>
+                {% endif %}
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="collapsible-body">
+        {% for comm in review.comments %}
           <div class="col s12 m8 offset-m2 l6 offset-l3">
             <div class="card-panel">
               <div class="row">
@@ -249,7 +253,7 @@
                     class="review-card-img"
                     src="https://s.abcnews.com/images/US/komins-missing-hiker-ho-mo-20190817_hpMain_16x9_1600.jpg"
                   />
-                  <div class="hiker-name">{ Hiker Name }</div>
+                  <div class="hiker-name">{{ get_user(comm.comment_by).name }}</div>
                   <div class="hiker-state">
                     <span class="hiker-state-key">Completed</span>
                     <span class="hiker-state-value">4</span>
@@ -258,209 +262,43 @@
                   </div>
                 </div>
                 <p class="trail-review-para">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Excepturi nesciunt necessitatibus, nam at voluptate quod
-                  dolore doloremque! Quam dolore porro aliquam exercitationem
-                  temporibus quidem sequi nulla est hic iure quis praesentium
-                  illo modi voluptates tenetur, quae dolor excepturi ex vero
-                  voluptatibus iste accusantium similique. Nisi obcaecati quam
-                  dolores sapiente perferendis?
+                {{ comm.comment_post }}
                 </p>
               </div>
             </div>
           </div>
-            <a class="btn green lighten-2 trail-action-btn">Add comment </a>
+        {% endfor %}
+            <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">Add comment </a>
+        </div>
+
+      <!-- "Add Comment form -->
+        <div id="add_comment_{{ review._id }}" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                {% if session.name %}
+                <form class="col s12" method="POST" action="{{ url_for('add_comment', trail_id=trail._id, review_id=review._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="comment_post" name="comment_post" class="materialize-textarea"></textarea>
+                            <label for="comment_post">Write your comment here ..</label>
+                        </div>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
+                    </div>
+                </form>
+                {% else %}
+                    <div>you need to login to add Comment</div>
+                    <a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
+                {% endif %}
+                </div>
+            </div>
         </div>
       </li>
     {% endfor %}
     </ul>
   </div>
-
-    <!-- <div class="container">
-    <ul class="collapsible">
-      <li>
-        <div class="collapsible-header">
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTfptErL5HRx01jgXwJrklaRx1DwZMIGZvFSw&usqp=CAU"
-                  />
-                  <div class="hiker-name">{ Hiker Name }</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">3</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">5</span>
-                  </div>
-                  <div class="container">
-                    <span
-                      ><i class="fas fa-check-circle completed-icon"></i
-                      >Completed</span
-                    >
-                    <span
-                      ><i class="fas fa-plus-circle plan-icon"></i> Plan
-                      to</span
-                    >
-                  </div>
-                </div>
-                <div class="col s12 m8 review-header">
-                  <div class="container review-stars-div">
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span
-                      ><i class="trail-stars fas fa-star"></i
-                    ></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  </div>
-                  <div class="container trail-review-header">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                  </div>
-                  <p class="trail-review-para">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Excepturi nesciunt necessitatibus, nam at voluptate quod
-                    dolore doloremque! Quam dolore porro aliquam exercitationem
-                    temporibus quidem
-                  </p>
-                  <a class="btn deep-orange lighten-2 trail-action-btn"
-                    >comments <i class="fas fa-caret-down"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="collapsible-body">
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="https://s.abcnews.com/images/US/komins-missing-hiker-ho-mo-20190817_hpMain_16x9_1600.jpg"
-                  />
-                  <div class="hiker-name">{ Hiker Name }</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">4</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">2</span>
-                  </div>
-                </div>
-                <p class="trail-review-para">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Excepturi nesciunt necessitatibus, nam at voluptate quod
-                  dolore doloremque! Quam dolore porro aliquam exercitationem
-                  temporibus quidem sequi nulla est hic iure quis praesentium
-                  illo modi voluptates tenetur, quae dolor excepturi ex vero
-                  voluptatibus iste accusantium similique. Nisi obcaecati quam
-                  dolores sapiente perferendis?
-                </p>
-              </div>
-            </div>
-          </div>
-                <a class="btn green lighten-2 trail-action-btn">Add comment </a>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="container">
-    <ul class="collapsible">
-      <li>
-        <div class="collapsible-header">
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="https://amp.thenationalnews.com/image/policy:1.888870:1564114189/na21-dead-hiker.JPG?f=16x9&w=1200&$p$f$w=8dfcb3e"
-                  />
-                  <div class="hiker-name">{ Hiker Name }</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">4</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">2</span>
-                  </div>
-                  <div class="container">
-                    <span
-                      ><i class="fas fa-check-circle completed-icon"></i
-                      >Completed</span
-                    >
-                    <span
-                      ><i class="fas fa-plus-circle plan-icon"></i> Plan
-                      to</span
-                    >
-                  </div>
-                </div>
-                <div class="col s12 m8 review-header">
-                  <div class="container review-stars-div">
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span
-                      ><i class="trail-stars fas fa-star"></i
-                    ></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                  </div>
-                  <div class="container trail-review-header">
-                    Lorem ipsum dolor sit amet
-                  </div>
-                  <p class="trail-review-para">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Excepturi nesciunt necessitatibus, nam at voluptate quod
-                    dolore doloremque! Quam dolore porro aliquam exercitationem
-                    temporibus quidem sequi nulla est hic iure quis praesentium
-                    illo modi voluptates tenetur, quae dolor excepturi ex vero
-                    voluptatibus iste accusantium similique. Nisi obcaecati quam
-                    dolores sapiente perferendis?
-                     tenetur, quae dolor excepturi ex vero
-                    voluptatibus iste accusantium similique. Nisi obcaecati quam
-                    dolores sapiente perferendis?
-                  </p>
-                  <a class="btn deep-orange lighten-2 trail-action-btn"
-                    >comments <i class="fas fa-caret-down"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="collapsible-body">
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="https://cdn.shopify.com/s/files/1/0071/6197/0786/products/0640274_0640277_Halti_Hiker_Womens_Drymaxx_Outdoor_Jacket_mood_4_34c51e10-4781-4cc6-bc0a-8f556c1009ba_2000x.jpg?v=1584995873"
-                  />
-                  <div class="hiker-name">{ Hiker Name }</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">4</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">2</span>
-                  </div>
-                </div>
-                <p class="trail-review-para">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Excepturi nesciunt necessitatibus, nam at voluptate quod
-                  dolore doloremque! Quam dolore porro aliquam exercitationem
-                  temporibus quidem sequi nulla 
-                </p>
-              </div>
-            </div>
-          </div>
-                <a class="btn green lighten-2 trail-action-btn">Add comment </a>
-        </div>
-      </li>
-    </ul>
-  </div> -->
 </section>
 
 
