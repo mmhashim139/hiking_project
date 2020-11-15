@@ -83,6 +83,12 @@
                 <form class="col s12" method="POST" action="{{ url_for('planning_trail', trail_id=trail._id) }}">
                     <div class="row">
                         <div class="input-field col s12">
+                            <input id="plan_header" name="plan_header" type="text" class="validate">
+                            <label for="plan_header">Plan Header </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
                             <textarea id="plan_post" name="plan_post" class="materialize-textarea"></textarea>
                             <label for="plan_post">Write about your plan ..</label>
                         </div>
@@ -175,6 +181,7 @@
 <section>
   <div class="container">
     <ul class="collapsible">
+    {% for review in reviews %}
       <li>
         <div class="collapsible-header">
           <div class="col s12 m8 offset-m2 l6 offset-l3">
@@ -185,7 +192,7 @@
                     class="review-card-img"
                     src="https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F191109234431-california-hiker-mountain-top.jpg"
                   />
-                  <div class="hiker-name">{ Hiker Name }</div>
+                  <div class="hiker-name">{{ review.post_by }}</div>
                   <div class="hiker-state">
                     <span class="hiker-state-key">Completed</span>
                     <span class="hiker-state-value">4</span>
@@ -193,17 +200,15 @@
                     <span class="hiker-state-value">2</span>
                   </div>
                   <div class="container">
-                    <span
-                      ><i class="fas fa-check-circle completed-icon"></i
-                      >Completed</span
-                    >
-                    <span
-                      ><i class="fas fa-plus-circle plan-icon"></i> Plan
-                      to</span
-                    >
+                {% if review.trail_status == "completed" %}
+                    <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
+                {% else %}
+                    <span><i class="fas fa-plus-circle plan-icon"></i> Planning</span>
+                {% endif %}
                   </div>
                 </div>
                 <div class="col s12 m8 review-header">
+                {% if review.trail_status == "completed" %}
                   <div class="container review-stars-div">
                     <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars fas fa-star"></i></span>
@@ -214,17 +219,19 @@
                     <span><i class="trail-stars far fa-star"></i></span>
                   </div>
                   <div class="container trail-review-header">
-                    An amazing trail to go in Co. Kerry
+                    {{ review.review_header}}
                   </div>
                   <p class="trail-review-para">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Excepturi nesciunt necessitatibus, nam at voluptate quod
-                    dolore doloremque! Quam dolore porro aliquam exercitationem
-                    temporibus quidem sequi nulla est hic iure quis praesentium
-                    illo modi voluptates tenetur, quae dolor excepturi ex vero
-                    voluptatibus iste accusantium similique. Nisi obcaecati quam
-                    dolores sapiente perferendis?
+                    {{ review.review_post }}
                   </p>
+                {% else %}
+                  <div class="container trail-review-header">
+                    {{ review.plan_header}}
+                  </div>
+                  <p class="trail-review-para">
+                    {{ review.plan_post }}
+                  </p>
+                {% endif %}
                   <a class="btn deep-orange lighten-2 trail-action-btn"
                     >comments <i class="fas fa-caret-down"></i
                   ></a>
@@ -262,12 +269,14 @@
               </div>
             </div>
           </div>
-                <a class="btn green lighten-2 trail-action-btn">Add comment </a>
+            <a class="btn green lighten-2 trail-action-btn">Add comment </a>
         </div>
       </li>
+    {% endfor %}
     </ul>
   </div>
-    <div class="container">
+
+    <!-- <div class="container">
     <ul class="collapsible">
       <li>
         <div class="collapsible-header">
@@ -451,7 +460,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 </section>
 
 
