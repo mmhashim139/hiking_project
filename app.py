@@ -193,6 +193,7 @@ def edit_profile():
 def delete_account(hiker_id):
     if request.method == "POST":
         hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
+        hiker_id = hiker["_id"]
     mongo.db.users.remove({"_id": ObjectId(hiker_id)})
     flash("Your account Deleted")
     return redirect(url_for("logout"))
@@ -319,6 +320,44 @@ def add_new_trail():
     flash("Trail Added")
     trail = mongo.db.trails.find_one({"name": newtrail["trail_name"]})
     reviews = ""
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+
+
+# Edit a trail info
+@app.route("/edit_trail/<trail_id>", methods=["GET", "POST"])
+def edit_trail(trail_id):
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+    if request.method == "POST":
+        trail_name = request.form.get("trail_name")
+        trail_county = request.form.get("trail_county")
+        map_location = request.form.get("map_location")
+        trail_image = request.form.get("trail_image")
+        trail_category = request.form.get("trail_category")
+        description = request.form.get("description")
+        length = request.form.get("length")
+        est_time = request.form.get("est_time")
+        avg_rating = request.form.get("avg_rating")
+        completed = request.form.get("completed")
+        planning = request.form.get("planning")
+    mongo.db.trails.update_many(
+        {"_id": ObjectId(trail_id)}, [{"$set":{
+            "trail_name": {"$cond": [{"$eq": [trail_name, ""]}, trail["trail_name"], trail_name]},
+            "trail_county": {"$cond": [{"$eq": [trail_county, ""]}, trail["trail_county"], trail_county]},
+            "map_location": {"$cond": [{"$eq": [map_location, ""]}, trail["map_location"], map_location]},
+            "trail_image": {"$cond": [{"$eq": [trail_image, ""]}, trail["trail_image"], trail_image]},
+            "trail_category": {"$cond": [{"$eq": [trail_category, ""]}, trail["trail_category"], trail_category]},
+            "description": {"$cond": [{"$eq": [description, ""]}, trail["description"], description]},
+            "length": {"$cond": [{"$eq": [length, ""]}, trail["length"], length]},
+            "est_time": {"$cond": [{"$eq": [est_time, ""]}, trail["est_time"], est_time]},
+            "avg_rating": {"$cond": [{"$eq": [avg_rating, ""]}, trail["avg_rating"], avg_rating]},
+            "completed": {"$cond": [{"$eq": [completed, ""]}, trail["completed"], completed]},
+            "planning": {"$cond": [{"$eq": [planning, ""]}, trail["planning"], planning]},
+        }}], upsert=True)
+    flash("Trail Edited ")
+    trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
+    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
     return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
 
 
