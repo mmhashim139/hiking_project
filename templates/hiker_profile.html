@@ -115,10 +115,33 @@
               <div class="row">
                 <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Edit Profile</button>
               </div>
+              <!-- Delete Account-->
+              <div>
+              <a href="#delete_account" class="modal-close modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete account</a>
+              </div>
             </form>
           </div>
         </div>
       </div>
+    <!-- "Delete Account form -->
+        <div id="delete_account" class="modal">
+            <div class="modal-content">
+            <div class="row">
+                <form class="col s12" method="POST" 
+                action="{{ url_for('delete_account', hiker_id=hiker._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <div>Are you Sure you want to DELETE your account</div>
+                        </div>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="waves-effect waves-light btn red modal-trigger" >DELETE </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
       {% endif %}
     </div>
   </div>
