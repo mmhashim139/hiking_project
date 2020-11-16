@@ -267,6 +267,12 @@
 <section>
   <div class="container">
     <div class="owl-carousel">
+    <!-- Render images from hiker gallery -->
+        {% for img in trail.gallery %}
+      <img
+        class="hiker-gallery-img materialboxed"
+        src="{{ img.img_url }}" />
+        {% endfor %}
       <img
         class="hiker-gallery-img materialboxed"
         src="https://cdn.pixabay.com/photo/2016/03/09/09/43/person-1245959_960_720.jpg"
