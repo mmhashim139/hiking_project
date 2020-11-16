@@ -283,6 +283,30 @@ def delete_post(review_id, trail_id):
     return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
 
 
+# Add a trail to completed trails
+@app.route("/add_new_trail", methods=["GET", "POST"])
+def add_new_trail():
+    if request.method == "POST":
+        newtrail = {
+            "trail_name": request.form.get("trail_name"),
+            "trail_county": request.form.get("trail_county"),
+            "map_location": request.form.get("map_location"),
+            "trail_image": request.form.get("trail_image"),
+            "trail_category": request.form.get("trail_category"),
+            "description": request.form.get("description"),
+            "length": request.form.get("length"),
+            "est_time": request.form.get("est_time"),
+            "avg_rating": request.form.get("avg_rating"),
+            "completed": request.form.get("completed"),
+            "planning": request.form.get("planning")
+            }
+    mongo.db.trails.insert_one(newtrail)
+    flash("Trail Added")
+    trail = mongo.db.trails.find_one({"name": newtrail["trail_name"]})
+    reviews = ""
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+
+
 # make sure to debug= False before submit
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
