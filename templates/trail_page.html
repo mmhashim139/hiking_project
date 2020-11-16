@@ -208,36 +208,22 @@
                   </div>
                 </div>
                 <div class="col s12 m8 review-header">
-                {% if review.trail_status == "completed" %}
                   <div class="container review-stars-div">
+                  {{ review.review_rating }}
                     <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars fas fa-star"></i></span>
-                    <span
-                      ><i class="trail-stars fas fa-star-half-alt"></i
-                    ></span>
+                    <span><i class="trail-stars fas fa-star-half-alt"></i></span>
                     <span><i class="trail-stars far fa-star"></i></span>
                   </div>
                   <div class="container trail-review-header">
-                    {{ review.review_header}}
+                    {{ review.review_header }}
                   </div>
                   <p class="trail-review-para">
                     {{ review.review_post }}
                   </p>
-                {% else %}
-                  <div class="container trail-review-header">
-                    {{ review.plan_header}}
-                  </div>
-                  <p class="trail-review-para">
-                    {{ review.plan_post }}
-                  </p>
-                {% endif %}
-                {% if review.comments %}
                   <a class="btn deep-orange lighten-2 trail-action-btn">
                   comments <i class="fas fa-caret-down"></i></a>
-                {% else %}
-                <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment">Add comment </a>
-                {% endif %}
                 </div>
               </div>
             </div>
