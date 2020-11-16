@@ -49,10 +49,12 @@ def get_trail(id):
 # show Hiker profile page
 @app.route("/hiker_profile/<hiker_id>", methods=["GET", "POST"])
 def hiker_profile(hiker_id):
+    hikers = list(mongo.db.users.find())
+    trails = list(mongo.db.trails.find())
     hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
     hiker_id = hiker["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail)
+    return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails)
 
 
 # show Hiker profile page for logedIn user
@@ -76,7 +78,9 @@ def get_user(id):
 def trail_page(trail_id):
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    hikers = list(mongo.db.users.find())
+    trails = list(mongo.db.trails.find())
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, hikers=hikers, trails=trails)
 
 
 # sign_up Function
