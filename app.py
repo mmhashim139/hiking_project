@@ -194,14 +194,14 @@ def planning_trail(trail_id):
             "trail_id": trail_id,
             "post_by": hiker,
             "trail_status": "planning",
-            "plan_header": request.form.get("plan_header"),
-            "plan_post": request.form.get("plan_post")
+            "review_header": request.form.get("plan_header"),
+            "review_post": request.form.get("plan_post")
             }
     mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
         {"trail_id": newtrail["trail_id"],
         "trail_status": newtrail["trail_status"],
-        "review_header": newtrail["plan_header"],
-        "review_post" : newtrail["plan_post"]
+        "review_header": newtrail["review_header"],
+        "review_post" : newtrail["review_post"]
         }}})
     mongo.db.reviews.insert_one(newtrail)
     flash("Trail Added to your plan")
@@ -257,6 +257,20 @@ def add_comment(review_id, trail_id):
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
     return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
 
+
+# Delete Post
+@app.route("/delete_post/<review_id>/<trail_id>", methods=["GET", "POST"])
+def delete_post(review_id, trail_id):
+    if request.method == "POST":
+        review_id = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})["_id"]
+        hiker = mongo.db.users.find_one({"name": session["name"]})["_id"]
+    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+    flash("Post Deleted")
+    name = mongo.db.users.find_one({"name": session["name"]})["name"]
+    hiker = mongo.db.users.find_one({"name": session["name"]})
+    hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
+    reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
+    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
 
 
 
