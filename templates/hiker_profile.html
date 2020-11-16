@@ -200,337 +200,82 @@
 <!-- Hiker selected trails with review -->
 <section>
   <div class="container">
+    {% if hiker.Added_trails %}
     <h3 class="cta-header">{{ hiker.profile_name }} trails</h3>
-    <!-- Add for loop to inhert data drom hiker profile       ---------------------------------------------- -->
+    {% endif %}
+    {% for review in reviews %}
     <div class="col s12 m7">
       <div class="card">
         <div class="row">
           <div class="card-image col s12 m4">
             <img
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
+              src="{{ get_trail(review.trail_id).trail_image }}"
             />
             <div class="trail-btm-div">
               <div class="trail-header trail-btm-info">
-                Carrauntoohil Mountain
+                {{ get_trail(review.trail_id).trail_name }}
               </div>
-              <span class="trail-state-key trail-btm-info">Length</span>
-              <span class="trail-state-value trail-btm-info">14.5 km</span>
-              <span class="trail-state-key trail-btm-info">Est. Time</span>
-              <span class="trail-state-value trail-btm-info">5.5 hours</span>
+                <div class="container">
+                {% if review.trail_status == "completed" %}
+                <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
+                {% else %}
+                <span><i class="fas fa-plus-circle plan-icon"></i> Planning</span>
+                {% endif %}
+                </div>
             </div>
           </div>
           <div class="card-content col s12 m8">
             <div class="trail-review-div">
               <div class="trail-review-header">
-                An amazing trail to go in Co. Kerry
+                {{ review.review_header }}
               </div>
               <div>
+              {{ review.review_rating }}
                 <span><i class="trail-stars fas fa-star"></i></span>
                 <span><i class="trail-stars fas fa-star"></i></span>
                 <span><i class="trail-stars fas fa-star"></i></span>
                 <span><i class="trail-stars fas fa-star-half-alt"></i></span>
                 <span><i class="trail-stars far fa-star"></i></span>
               </div>
-              <div>
-                <a href="#">
-                  <i class="fas fa-check-circle completed-icon"></i>
-                  Completed</a
-                >
-                <a href="#">
-                  <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
-                >
-                <a
-                  href="#"
-                  class="tooltipped"
-                  data-position="bottom"
-                  data-tooltip="Edit Trail"
-                  ><span class="hiker-state-value"
-                    ><i class="far fa-edit"></i></span
-                ></a>
-              </div>
               <p class="trail-review-para">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Excepturi nesciunt necessitatibus, nam at voluptate quod dolore
-                doloremque! Quam dolore porro aliquam exercitationem temporibus
-                quidem sequi nulla est hic iure quis praesentium illo modi
-                voluptates tenetur, quae dolor excepturi ex vero voluptatibus
-                iste accusantium similique. Nisi obcaecati quam dolores sapiente
-                perferendis?
+              {{ review.review_post }}
               </p>
               <div class="trail-action-div col s12">
-                <a class="btn deep-orange lighten-2 trail-action-btn" href="#"
-                  >comments</a
-                >
+                <a class="btn deep-orange lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">comment</a>
+              <!-- "Add Comment form -->
+                <div id="add_comment_{{ review._id }}" class="modal">
+                    <div class="modal-content">
+                    <div class="row">
+                    {% if session.name %}
+                    <form class="col s12" method="POST" 
+                    action="{{ url_for('add_comment', trail_id=get_trail(review.trail_id)._id, review_id=review._id) }}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="comment_post" name="comment_post" class="materialize-textarea"></textarea>
+                                <label for="comment_post">Write your comment here ..</label>
+                            </div>
+                        </div>
+                    <!-- Submit Btn-->
+                        <div class="row">
+                            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
+                        </div>
+                    </form>
+                    {% else %}
+                        <div>you need to login to add Comment</div>
+                        <a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
+                    {% endif %}
+                        </div>
+                    </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!--ONly to see page look , Remove from HTML To be Added from Mongo DB-->
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="row">
-          <div class="card-image col s12 m4">
-            <img
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-            <div class="trail-btm-div">
-              <div class="trail-header trail-btm-info">
-                Carrauntoohil Mountain
-              </div>
-              <span class="trail-state-key trail-btm-info">Length</span>
-              <span class="trail-state-value trail-btm-info">14.5 km</span>
-              <span class="trail-state-key trail-btm-info">Est. Time</span>
-              <span class="trail-state-value trail-btm-info">5.5 hours</span>
-            </div>
-          </div>
-          <div class="card-content col s12 m8">
-            <div class="trail-review-div">
-              <div class="trail-review-header">
-                An amazing trail to go in Co. Kerry
-              </div>
-              <div>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-                <span><i class="trail-stars far fa-star"></i></span>
-              </div>
-              <div>
-                <a href="#">
-                  <i class="fas fa-check-circle completed-icon"></i>
-                  Completed</a
-                >
-                <a href="#">
-                  <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
-                >
-                <a
-                  href="#"
-                  class="tooltipped"
-                  data-position="bottom"
-                  data-tooltip="Edit Trail"
-                  ><span class="hiker-state-value"
-                    ><i class="far fa-edit"></i></span
-                ></a>
-              </div>
-              <p class="trail-review-para">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Excepturi nesciunt necessitatibus, nam at voluptate quod dolore
-                doloremque! Quam dolore porro aliquam exercitationem temporibus
-                quidem sequi nulla est hic iure quis praesentium illo modi
-                voluptates tenetur, quae dolor excepturi ex vero voluptatibus
-                iste accusantium similique. Nisi obcaecati quam dolores sapiente
-                perferendis?
-              </p>
-              <div class="trail-action-div col s12">
-                <a class="btn deep-orange lighten-2 trail-action-btn" href="#"
-                  >comments</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="row">
-          <div class="card-image col s12 m4">
-            <img
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-            <div class="trail-btm-div">
-              <div class="trail-header trail-btm-info">
-                Carrauntoohil Mountain
-              </div>
-              <span class="trail-state-key trail-btm-info">Length</span>
-              <span class="trail-state-value trail-btm-info">14.5 km</span>
-              <span class="trail-state-key trail-btm-info">Est. Time</span>
-              <span class="trail-state-value trail-btm-info">5.5 hours</span>
-            </div>
-          </div>
-          <div class="card-content col s12 m8">
-            <div class="trail-review-div">
-              <div class="trail-review-header">
-                An amazing trail to go in Co. Kerry
-              </div>
-              <div>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-                <span><i class="trail-stars far fa-star"></i></span>
-              </div>
-              <div>
-                <a href="#">
-                  <i class="fas fa-check-circle completed-icon"></i>
-                  Completed</a
-                >
-                <a href="#">
-                  <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
-                >
-                <a
-                  href="#"
-                  class="tooltipped"
-                  data-position="bottom"
-                  data-tooltip="Edit Trail"
-                  ><span class="hiker-state-value"
-                    ><i class="far fa-edit"></i></span
-                ></a>
-              </div>
-              <p class="trail-review-para">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Excepturi nesciunt necessitatibus, nam at voluptate quod dolore
-                doloremque! Quam dolore porro aliquam exercitationem temporibus
-                quidem sequi nulla est hic iure quis praesentium illo modi
-                voluptates tenetur, quae dolor excepturi ex vero voluptatibus
-                iste accusantium similique. Nisi obcaecati quam dolores sapiente
-                perferendis?
-              </p>
-              <div class="trail-action-div col s12">
-                <a class="btn deep-orange lighten-2 trail-action-btn" href="#"
-                  >comments</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="row">
-          <div class="card-image col s12 m4">
-            <img
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-            <div class="trail-btm-div">
-              <div class="trail-header trail-btm-info">
-                Carrauntoohil Mountain
-              </div>
-              <span class="trail-state-key trail-btm-info">Length</span>
-              <span class="trail-state-value trail-btm-info">14.5 km</span>
-              <span class="trail-state-key trail-btm-info">Est. Time</span>
-              <span class="trail-state-value trail-btm-info">5.5 hours</span>
-            </div>
-          </div>
-          <div class="card-content col s12 m8">
-            <div class="trail-review-div">
-              <div class="trail-review-header">
-                An amazing trail to go in Co. Kerry
-              </div>
-              <div>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-                <span><i class="trail-stars far fa-star"></i></span>
-              </div>
-              <div>
-                <a href="#">
-                  <i class="fas fa-check-circle completed-icon"></i>
-                  Completed</a
-                >
-                <a href="#">
-                  <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
-                >
-                <a
-                  href="#"
-                  class="tooltipped"
-                  data-position="bottom"
-                  data-tooltip="Edit Trail"
-                  ><span class="hiker-state-value"
-                    ><i class="far fa-edit"></i></span
-                ></a>
-              </div>
-              <p class="trail-review-para">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Excepturi nesciunt necessitatibus, nam at voluptate quod dolore
-                doloremque! Quam dolore porro aliquam exercitationem temporibus
-                quidem sequi nulla est hic iure quis praesentium illo modi
-                voluptates tenetur, quae dolor excepturi ex vero voluptatibus
-                iste accusantium similique. Nisi obcaecati quam dolores sapiente
-                perferendis?
-              </p>
-              <div class="trail-action-div col s12">
-                <a class="btn deep-orange lighten-2 trail-action-btn" href="#"
-                  >comments</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="row">
-          <div class="card-image col s12 m4">
-            <img
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-            <div class="trail-btm-div">
-              <div class="trail-header trail-btm-info">
-                Carrauntoohil Mountain
-              </div>
-              <span class="trail-state-key trail-btm-info">Length</span>
-              <span class="trail-state-value trail-btm-info">14.5 km</span>
-              <span class="trail-state-key trail-btm-info">Est. Time</span>
-              <span class="trail-state-value trail-btm-info">5.5 hours</span>
-            </div>
-          </div>
-          <div class="card-content col s12 m8">
-            <div class="trail-review-div">
-              <div class="trail-review-header">
-                An amazing trail to go in Co. Kerry
-              </div>
-              <div>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-                <span><i class="trail-stars far fa-star"></i></span>
-              </div>
-              <div>
-                <a href="#">
-                  <i class="fas fa-check-circle completed-icon"></i>
-                  Completed</a
-                >
-                <a href="#">
-                  <i class="fas fa-plus-circle plan-icon"></i> Plan to</a
-                >
-                <a
-                  href="#"
-                  class="tooltipped"
-                  data-position="bottom"
-                  data-tooltip="Edit Trail"
-                  ><span class="hiker-state-value"
-                    ><i class="far fa-edit"></i></span
-                ></a>
-              </div>
-              <p class="trail-review-para">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Excepturi nesciunt necessitatibus, nam at voluptate quod dolore
-                doloremque! Quam dolore porro aliquam exercitationem temporibus
-                quidem sequi nulla est hic iure quis praesentium illo modi
-                voluptates tenetur, quae dolor excepturi ex vero voluptatibus
-                iste accusantium similique. Nisi obcaecati quam dolores sapiente
-                perferendis?
-              </p>
-              <div class="trail-action-div col s12">
-                <a class="btn deep-orange lighten-2 trail-action-btn" href="#"
-                  >comments</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- -->
+    {% endfor %}
   </div>
+
 </section>
 
 <!-- Parallax  -->
