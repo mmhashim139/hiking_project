@@ -37,9 +37,9 @@
         </div>
         <div>
           <span class="trail-state-key">Completed</span>
-          <span class="hiker-state-value">3</span>
+          <span class="hiker-state-value">{{ trail.completed }}</span>
           <span class="trail-state-key">Planing</span>
-          <span class="hiker-state-value">2</span>
+          <span class="hiker-state-value">{{ trail.planning }}</span>
         </div>
         <div>
           <span class="trail-state-key">Length</span>
@@ -135,11 +135,10 @@
         </div>
         <!-- ======================================================================================= -->
       </div>
-      <div class="col s12 m6">
-        <img
-          class="trail-map"
-          src="https://emerald-heritage.com/assets/img/hero/Screen-Shot-2018-04-06-at-12.37.00.png"
-        />
+      <div class="col s12 m6"> 
+      <a class="tooltipped" data-tooltip="Map Location" href="{{ trail.map_location }}" target="_blank">
+        <img class="trail-map" src="https://www.tech-recipes.com/wp-content/uploads/2014/03/Google-Map-Logo.png"/>
+      </a>
       </div>
     </div>
   </div>
@@ -190,7 +189,7 @@
                 <div class="col s12 m4">
                   <img
                     class="review-card-img"
-                    src="https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F191109234431-california-hiker-mountain-top.jpg"
+                    src="{{ get_user(review.post_by).profile_img }}"
                   />
                   <div class="hiker-name">{{ get_user(review.post_by).name }}</div>
                   <div class="hiker-state">
@@ -262,7 +261,7 @@
                 <div class="col s12 m4">
                   <img
                     class="review-card-img"
-                    src="https://s.abcnews.com/images/US/komins-missing-hiker-ho-mo-20190817_hpMain_16x9_1600.jpg"
+                    src="{{ get_user(comm.comment_by).profile_img }}"
                   />
                   <div class="hiker-name">{{ get_user(comm.comment_by).name }}</div>
                   <div class="hiker-state">
