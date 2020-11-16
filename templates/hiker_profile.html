@@ -1,6 +1,18 @@
 {% extends "base.html" %} {% block hiker_profile %}
 <!-- Hiker Profile Header section -->
 <section>
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="row  ">
+                    <h4 class=" deep-orange-text text-darken-2 center-align ">{{ message }}</h4>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+ </section>
+<section>
   <!-- Hiker profile Header 
     Showes Hiker Details like image , name bio etc..
     -->
@@ -241,6 +253,31 @@
               {{ review.review_post }}
               </p>
               <div class="trail-action-div col s12">
+            <!-- Delete Post Icon-->
+            {% if session.name == hiker.name %}
+              <a href="#delete_trail_{{ review._id }}" class=" modal-trigger" >
+              <span class="hiker-state-value tooltipped" data-tooltip="Delete">
+              <i class="trail-stars far fa-trash-alt"></i></span></a>
+              <!-- "Delete Post form -->
+                <div id="delete_trail_{{ review._id }}" class="modal">
+                    <div class="modal-content">
+                    <div class="row">
+                    <form class="col s12" method="POST" 
+                    action="{{ url_for('delete_post', trail_id=get_trail(review.trail_id)._id, review_id=review._id) }}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <div>Are you Sure you want to DELETE this post</div>
+                            </div>
+                        </div>
+                    <!-- Submit Btn-->
+                        <div class="row">
+                            <button type="submit" class="modal-close waves-effect waves-light btn red modal-trigger" >DELETE</button>
+                        </div>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
                 <a class="btn deep-orange lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">comment</a>
               <!-- "Add Comment form -->
                 <div id="add_comment_{{ review._id }}" class="modal">
