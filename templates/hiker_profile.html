@@ -447,83 +447,33 @@
     <h2 class="cta-header">Other Hikers ..</h2>
     <!-- I am using Owl Carousel to show cards , animation added in script.js file-->
     <div class="slider owl-carousel more-hiker-slider">
+      {% for h in hikers %}
+      <div class="col s12 m4">
       <div class="card hiker-card">
         <div>
-          <img
-            class="hiker-card-img"
-            src="https://cdn.pixabay.com/photo/2010/12/23/13/06/climber-4048_960_720.jpg"
+          <img class="hiker-card-img"
+            src="{{ h.profile_img }}"
           />
         </div>
-        <div class="hiker-name">Hiker Name</div>
+        <div class="hiker-name">{{ h.profile_name }}</div>
         <div class="hiker-state">
           <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">3</span>
+          <span class="hiker-state-value">{{ h.completed }}</span>
           <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">2</span>
+          <span class="hiker-state-value">{{ h.planing }}</span>
         </div>
         <div class="card-content hiker-bio">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe vel
-            tempore hic corrupti corporis laborum?
-          </p>
+          <p>{{ h.bio }}</p>
         </div>
         <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="#"
-            >Visit Profile</a
-          >
+          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile', hiker_id=h._id) }}">Visit Profile</a>
         </div>
       </div>
-      <div class="card hiker-card">
-        <div>
-          <img
-            class="hiker-card-img"
-            src="https://cdn.pixabay.com/photo/2010/12/23/13/06/climber-4048_960_720.jpg"
-          />
-        </div>
-        <div class="hiker-name">Hiker Name</div>
-        <div class="hiker-state">
-          <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">3</span>
-          <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">2</span>
-        </div>
-        <div class="card-content hiker-bio">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe vel
-            tempore hic corrupti corporis laborum?
-          </p>
-        </div>
-        <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="#">Visit Profile</a>
-        </div>
       </div>
-      <div class="card hiker-card">
-        <div>
-          <img
-            class="hiker-card-img"
-            src="https://cdn.pixabay.com/photo/2010/12/23/13/06/climber-4048_960_720.jpg"
-          />
-        </div>
-        <div class="hiker-name">Hiker Name</div>
-        <div class="hiker-state">
-          <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">3</span>
-          <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">2</span>
-        </div>
-        <div class="card-content hiker-bio">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe vel
-            tempore hic corrupti corporis laborum?
-          </p>
-        </div>
-        <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="#">Visit Profile</a>
-        </div>
-      </div>
+      {% endfor %}
     </div>
     <div class="more-div">
-      <a class="waves-effect waves-light btn deep-orange lighten-2" href="#"
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_hikers') }}"
         >All Hikers</a
       >
     </div>
@@ -531,6 +481,8 @@
 </section>
 
 <!-- Join Our Community Section / CTA Sign up Form-->
+{% if session.name %}
+{% else %}
 <section>
   <div class="container">
     <div class="cta-header">Join our Community ..</div>
@@ -620,7 +572,7 @@
     </div>
   </div>
 </section>
-
+{% endif %}
 <!-- Parallax  -->
 <div class="parallax-container">
   <div class="parallax">
@@ -636,17 +588,18 @@
   <div class="container">
     <div class="cta-header">Find your next trail..</div>
     <div class="slider owl-carousel more-trail-slider">
-      <a href="#" class="more-trails-cards-link">
+      {% for t in trails %}
+      <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">
         <div class="card more-trail-card">
           <div>
             <img
               class="more-trail-image"
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
+              src="{{ t.trail_image }}"
             />
           </div>
           <div class="trail-btm-div">
             <div class="trail-header trail-btm-info">
-              Carrauntoohil Mountain
+              {{ t.trail_name }}
             </div>
             <div>
               <span><i class="trail-stars fas fa-star"></i></span>
@@ -656,93 +609,16 @@
               <span><i class="trail-stars far fa-star"></i></span>
             </div>
             <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">14.5 km</span>
+            <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
             <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">5.5 hours</span>
+            <span class="trail-state-value trail-btm-info">{{ t.est_time }}</span>
           </div>
         </div>
-      </a>
-      <a href="#" class="more-trails-cards-link">
-        <div class="card more-trail-card">
-          <div>
-            <img
-              class="more-trail-image"
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-          </div>
-          <div class="trail-btm-div">
-            <div class="trail-header trail-btm-info">
-              Carrauntoohil Mountain
-            </div>
-            <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
-            </div>
-            <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">14.5 km</span>
-            <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">5.5 hours</span>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="more-trails-cards-link">
-        <div class="card more-trail-card">
-          <div>
-            <img
-              class="more-trail-image"
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-          </div>
-          <div class="trail-btm-div">
-            <div class="trail-header trail-btm-info">
-              Carrauntoohil Mountain
-            </div>
-            <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
-            </div>
-            <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">14.5 km</span>
-            <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">5.5 hours</span>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="more-trails-cards-link">
-        <div class="card more-trail-card">
-          <div>
-            <img
-              class="more-trail-image"
-              src="https://cdn.pixabay.com/photo/2019/05/16/18/51/cliffs-of-moher-4207875_960_720.jpg"
-            />
-          </div>
-          <div class="trail-btm-div">
-            <div class="trail-header trail-btm-info">
-              Carrauntoohil Mountain
-            </div>
-            <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
-            </div>
-            <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">14.5 km</span>
-            <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">5.5 hours</span>
-          </div>
-        </div>
-      </a>
+     </a>
+    {% endfor %}
     </div>
     <div class="more-div">
-      <a class="waves-effect waves-light btn deep-orange lighten-2" href="#"
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_trails') }}"
         >All Trails</a
       >
     </div>
@@ -752,9 +628,7 @@
 <!-- Parallax  -->
 <div class="parallax-container">
   <div class="parallax">
-    <img
-      src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"
-    />
+    <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"/>
   </div>
 </div>
 {% endblock %}
