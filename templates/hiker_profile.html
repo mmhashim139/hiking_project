@@ -55,12 +55,8 @@
       {{ hiker.bio }}
       </p>
        {% if session.name == hiker.name %}
-      <a
-        href="#profile_edit"
-        class="tooltipped modal-trigger"
-        data-position="bottom"
-        data-tooltip="Edit Profile"
-      >
+      <a href="#profile_edit" class="tooltipped modal-trigger"
+        data-position="bottom" data-tooltip="Edit Profile" >
         <span class="hiker-state-value"><i class="far fa-edit"></i></span>
       </a>
       <!-- Edit Profile Form-->
@@ -231,6 +227,104 @@
     </div>
   </div>
 </section>
+
+<!-- Add Trail -->
+       {% if session.name == "admin" %}
+<section>
+  <div class="container">
+    <div class="cta-header">Add a trail to HIKINI</div>
+    <!-- Sign up Modal Trigger -->
+    <div class="sign-up-btn">
+      <a
+        class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
+        href="#add_new_trail"
+        >Add new Trail</a
+      >
+    </div>
+    <!-- Sign up Modal Form -->
+    <div id="add_new_trail" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12" method="POST" action="{{ url_for('add_new_trail') }}"> 
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_name" id="trail_name" name="trail_name" type="text" />
+                <label for="trail_name">Trail Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_county" id="trail_county" name="trail_county" type="text" />
+                <label for="trail_county">Trail County</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="map_location" id="map_location" name="map_location" type="text" />
+                <label for="map_location">Map Location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_image" id="trail_image" name="trail_image" type="text" />
+                <label for="trail_image">Trail Header image</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_category" id="trail_category" name="trail_category" type="text" />
+                <label for="trail_category">Trail Category</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="description" id="description" name="description" type="text" />
+                <label for="description">Trail Description</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="length" id="length" name="length" type="text" />
+                <label for="length">Trail Length</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="est_time" id="est_time" name="est_time" type="text" />
+                <label for="est_time">Trail Est_time</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="avg_rating" id="avg_rating" name="avg_rating" type="text" />
+                <label for="avg_rating">Trail avg_rating</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="completed" id="completed" name="completed" type="text" />
+                <label for="completed">completed</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="planning" id="planning" name="planning" type="text" />
+                <label for="planning">Planning</label>
+              </div>
+            </div>
+
+            <div class="sign-up-btn">
+              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 ">
+                Add Trail
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+      {%  endif %}
 
 <!-- Hiker selected trails with review -->
 <section>
