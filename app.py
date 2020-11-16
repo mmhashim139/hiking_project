@@ -198,6 +198,17 @@ def delete_account(hiker_id):
     return redirect(url_for("logout"))
 
 
+# Delete Trail
+@app.route("/delete_trail/<trail_id>", methods=["POST"])
+def delete_trail(trail_id):
+    if request.method == "POST":
+        trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
+    mongo.db.trails.remove({"_id": ObjectId(trail_id)})
+    flash("Trail Deleted")
+    trails = list(mongo.db.trails.find())
+    return render_template("all_trails.html", trails=trails)
+
+
 # Add a trail to planned trails with post
 @app.route("/planning_trail/<trail_id>", methods=["GET", "POST"])
 def planning_trail(trail_id):
