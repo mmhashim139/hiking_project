@@ -184,6 +184,16 @@ def edit_profile():
     return redirect(url_for("my_account", name=name))
 
 
+# Delete account
+@app.route("/delete_account/<hiker_id>", methods=["POST"])
+def delete_account(hiker_id):
+    if request.method == "POST":
+        hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
+    mongo.db.users.remove({"_id": ObjectId(hiker_id)})
+    flash("Your account Deleted")
+    return redirect(url_for("logout"))
+
+
 # Add a trail to planned trails with post
 @app.route("/planning_trail/<trail_id>", methods=["GET", "POST"])
 def planning_trail(trail_id):
@@ -271,7 +281,6 @@ def delete_post(review_id, trail_id):
     hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
     return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
-
 
 
 # make sure to debug= False before submit
