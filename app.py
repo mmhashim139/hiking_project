@@ -60,11 +60,13 @@ def hiker_profile(hiker_id):
 # show Hiker profile page for logedIn user
 @app.route("/hiker_page/<name>", methods=["GET", "POST"])
 def my_account(name):
+    hikers = list(mongo.db.users.find())
+    trails = list(mongo.db.trails.find())
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
     hiker = mongo.db.users.find_one({"name": session["name"]})
     hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
+    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails)
 
 
 # get user data into reviews section
@@ -171,6 +173,7 @@ def edit_profile():
     name = session["name"]
     if request.method == "POST":
         profile_name = request.form.get("profile_name")
+        profile_img = request.form.get("profile_img")
         bio = request.form.get("hiker_bio")
         facebook_link = request.form.get("facebook_link")
         instagram_link = request.form.get("instagram_link")
@@ -180,6 +183,7 @@ def edit_profile():
     mongo.db.users.update_many(
         {"name": session["name"]}, [{"$set":{
             "profile_name": {"$cond": [{"$eq": [profile_name, ""]}, hiker["profile_name"], profile_name]},
+            "profile_img": {"$cond": [{"$eq": [profile_img, ""]}, hiker["profile_img"], profile_img]},
             "bio": {"$cond": [{"$eq": [bio, ""]}, hiker["bio"], bio]},
             "facebook_link": {"$cond": [{"$eq": [facebook_link, ""]}, hiker["facebook_link"], facebook_link]},
             "instagram_link": {"$cond": [{"$eq": [instagram_link, ""]}, hiker["instagram_link"], instagram_link]},
@@ -360,6 +364,30 @@ def edit_trail(trail_id):
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
     return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
 
+
+# add image route 
+@app.route("/add_image", methods=["GET", "POST"])
+def add_image():
+    hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
+    if request.method == "POST":
+        new_image = {
+            "upload_by" : hiker_id,
+            "trail_for_img" : request.form.get("trail_for_img"),
+            "img_url" : request.form.get("img_url")
+        }
+    mongo.db.users.update({"_id": ObjectId(hiker_id)}, {"$push": {"gallery":
+        {"trail_name": new_image["trail_for_img"],
+        "img_url": new_image["img_url"]
+        }}})
+    flash("New image uploaded")
+    trail = mongo.db.trails.find_one({"trail_name": new_image["trail_for_img"]})
+    trail_id = mongo.db.trails.find_one({"trail_name": new_image["trail_for_img"]})["_id"]
+    mongo.db.trails.update({"_id": ObjectId(trail_id)}, {"$push": {"gallery":
+        {"upload_by": new_image["upload_by"],
+        "img_url": new_image["img_url"]
+        }}})
+    name =  session["name"]
+    return redirect(url_for("my_account", name=name))
 
 # make sure to debug= False before submit
 if __name__ == "__main__":
