@@ -50,6 +50,322 @@
         <a href="#add_trail" class=" modal-trigger" >
         <span class="hiker-state-value"> Add the Trail <i class="fas fa-plus-circle"></i></span>
         </a>
+        <!-- ======================================================================================= -->
+      </div>
+      <div class="col s12 m6"> 
+      <a class="tooltipped" data-tooltip="Map Location" href="{{ trail.map_location }}" target="_blank">
+        <img class="trail-map" src="https://www.tech-recipes.com/wp-content/uploads/2014/03/Google-Map-Logo.png"/>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delete / Edit Trail -->
+       {% if session.name == "admin" %}
+<section>
+    <!-- Delete or Edit trail-->
+    <div class="container">
+    <div class="btn white">
+              <div>
+              <a href="#delete_trail" class=" modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete trail</a>
+              </div>
+    </div>
+    <div class="btn white">
+              <div>
+              <a href="#edit_trail" class=" modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Edit trail</a>
+              </div>
+    </div>
+    </div>
+</section>
+      {%  endif %}
+
+<!-- Trail Gallery -->
+<section>
+  <div class="container">
+    <div class="owl-carousel">
+    <!-- Render images from hiker gallery -->
+        {% for img in trail.gallery %}
+      <img
+        class="hiker-gallery-img materialboxed"
+        src="{{ img.img_url }}" />
+        {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Trail Reviews -->
+<section>
+  <div class="container">
+    <ul class="collapsible">
+    {% for review in reviews %}
+      <li>
+        <div class="collapsible-header">
+          <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel">
+              <div class="row">
+                <div class="col s12 m4">
+                  <img
+                    class="review-card-img"
+                    src="{{ get_user(review.post_by).profile_img }}"
+                  />
+                  <div class="hiker-name">{{ get_user(review.post_by).name }}</div>
+                  <div class="container">
+                {% if review.trail_status == "completed" %}
+                    <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
+                {% else %}
+                    <span><i class="fas fa-plus-circle plan-icon"></i> Planning</span>
+                {% endif %}
+                  </div>
+                </div>
+                <div class="col s12 m8 review-header">
+                  <div class="container review-stars-div">
+
+                  {% if review.review_rating == 5 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 4 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 3 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 2 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 1  %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  </div>
+                  <div class="container trail-review-header">
+                    {{ review.review_header }}
+                  </div>
+                  <p class="trail-review-para">
+                    {{ review.review_post }}
+                  </p>
+            <!-- Delete Post Icon-->
+            {% if session.name ==  get_user(review.post_by).name %}
+              <a href="#delete_trail_{{ review._id }}" class=" modal-trigger" >
+              <span class="hiker-state-value tooltipped" data-tooltip="Delete">
+              <i class="trail-stars far fa-trash-alt"></i></span></a>
+              <!-- "Delete Review modal form -->
+                <div id="delete_trail_{{ review._id }}" class="modal">
+                    <div class="modal-content">
+                    <div class="row">
+                    <form class="col s12" method="POST" 
+                    action="{{ url_for('delete_post', review_id=review._id) }}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <div>Are you Sure you want to DELETE this post</div>
+                            </div>
+                        </div>
+                    <!-- Submit Btn-->
+                        <div class="row">
+                            <button type="submit" class="modal-close waves-effect waves-light btn red modal-trigger" >DELETE</button>
+                        </div>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                  <a class="btn deep-orange lighten-2 trail-action-btn">
+                  comments <i class="fas fa-caret-down"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="collapsible-body">
+        {% for comm in review.comments %}
+          <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel">
+              <div class="row">
+                <div class="col s12 m4">
+                  <img
+                    class="review-card-img"
+                    src="{{ get_user(comm.comment_by).profile_img }}"
+                  />
+                  <div class="hiker-name">{{ get_user(comm.comment_by).name }}</div>
+                </div>
+                <p class="trail-review-para">
+                {{ comm.comment_post }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+            <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">Add comment </a>
+        </div>
+      <!-- "Add Comment form -->
+        <div id="add_comment_{{ review._id }}" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                {% if session.name %}
+                <form class="col s12" method="POST" action="{{ url_for('add_comment', trail_id=trail._id, review_id=review._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="comment_post" name="comment_post" class="materialize-textarea"></textarea>
+                            <label for="comment_post">Write your comment here ..</label>
+                        </div>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
+                    </div>
+                </form>
+                {% else %}
+                    <div>you need to login to add Comment</div>
+                    <a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</section>
+
+
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"/>
+  </div>
+</div>
+
+
+<!-- More Trails -->
+<section>
+  <div class="container">
+    <div class="cta-header">Find your next trail..</div>
+    <div class="slider owl-carousel more-trail-slider">
+      {% for t in trails %}
+      <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">
+        <div class="card more-trail-card">
+          <div>
+            <img
+              class="more-trail-image"
+              src="{{ t.trail_image }}"
+            />
+          </div>
+          <div class="trail-btm-div">
+            <div class="trail-header trail-btm-info">
+              {{ t.trail_name }}
+            </div>
+            <div>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
+              <span><i class="trail-stars far fa-star"></i></span>
+            </div>
+            <span class="trail-state-key trail-btm-info">Length</span>
+            <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
+            <span class="trail-state-key trail-btm-info">Est. Time</span>
+            <span class="trail-state-value trail-btm-info">{{ t.est_time }}</span>
+          </div>
+        </div>
+     </a>
+    {% endfor %}
+    </div>
+    <div class="more-div">
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_trails') }}"
+        >All Trails</a
+      >
+    </div>
+  </div>
+</section>
+
+<!-- Join Our Community Section / CTA Sign up Form-->
+{% if session.name %}
+{% else %}
+<section>
+  <div class="container">
+    <div class="cta-header">Join our Community ..</div>
+    <!-- Sign up Modal Trigger -->
+    <div class="sign-up-btn">
+      <a
+        class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
+        href="#signupform"
+        >Sign Up</a
+      >
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
+    />
+  </div>
+</div>
+
+<!-- Other Hikers in HIKINIE-->
+<section class="hikers-section">
+  <div class="container">
+    <h2 class="cta-header">Other Hikers ..</h2>
+    <!-- I am using Owl Carousel to show cards , animation added in script.js file-->
+    <div class="slider owl-carousel more-hiker-slider">
+      {% for h in hikers %}
+      <div class="col s12 m4">
+      <div class="card hiker-card">
+        <div>
+          <img class="hiker-card-img"
+            src="{{ h.profile_img }}"
+          />
+        </div>
+        <div class="hiker-name">{{ h.profile_name }}</div>
+        <div class="card-content hiker-bio">
+          <p>{{ h.bio }}</p>
+        </div>
+        <div class="card-action hiker-card-act">
+          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile', hiker_id=h._id) }}">Visit Profile</a>
+        </div>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="more-div">
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_hikers') }}"
+        >All Hikers</a
+      >
+    </div>
+  </div>
+</section>
+
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"/>
+  </div>
+</div>
+
+<!-- Modal Forms -->
+
+<!-- == ======================================================== == -->
       <!-- "Add a trail" form -->
         <div id="add_trail" class="modal">
             <div class="modal-content">
@@ -134,32 +450,81 @@
                 </div>
             </div>
         </div>
-        <!-- ======================================================================================= -->
-      </div>
-      <div class="col s12 m6"> 
-      <a class="tooltipped" data-tooltip="Map Location" href="{{ trail.map_location }}" target="_blank">
-        <img class="trail-map" src="https://www.tech-recipes.com/wp-content/uploads/2014/03/Google-Map-Logo.png"/>
-      </a>
+    <!-- Sign up Modal Form -->
+    <div id="signupform" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">Join HIKINIE</div>
+        <div class="row">
+          <form class="col s12" method="POST" action="{{ url_for('signup') }}">
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Name" id="name" name="name" type="text" 
+                minlength="4" maxlength="25" class="validate" required />
+                <label for="name">Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Email" id="email" name="email" type="email"
+                 class="validate" required />
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="password" id="password" name="password" type="password" minlength="8" class="validate" required/>
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" required/>
+                <label for="password_confirmation">Confirm Password</label>
+              </div>
+            </div>
+            <div class="sign-up-btn">
+              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 modal-trigger">
+                Sign Up
+              </button>
+            </div>
+            <a class="modal-close modal-trigger" href="#login_modal"
+              >Already Signed ..Login here
+            </a>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+    <!-- Login Modal Form -->
+    <div id="login_modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">Login</div>
+        <div class="row">
+          <form class="col s12" method="POST" action="{{ url_for('login') }}">
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Email" id="login_email" name="login_email" type="email"
+                 class="validate" required />
+                <label for="login_email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="password" id="login_password" name="login_password" type="password" class="validate" required/>
+                <label for="login_password">Password</label>
+              </div>
+            </div>
 
-<!-- Delete / Edit Trail -->
-       {% if session.name == "admin" %}
-<section>
-    <!-- Delete or Edit trail-->
-    <div class="container">
-    <div class="btn white">
-              <div>
-              <a href="#delete_trail" class=" modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete trail</a>
-              </div>
-    </div>
-    <div class="btn white">
-              <div>
-              <a href="#edit_trail" class=" modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Edit trail</a>
-              </div>
-    </div>
+            <div class="sign-up-btn">
+              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 ">
+                Login
+              </button>
+            </div>
+            <a class=" modal-trigger" href="#signupform"
+              >Not Signed yet .. sign up here
+            </a>
+          </form>
+        </div>
+      </div>
     </div>
     <!-- "Delete Trail form -->
         <div id="delete_trail" class="modal">
@@ -261,366 +626,6 @@
         </div>
       </div>
     </div>
-</section>
-      {%  endif %}
-
-<!-- Trail Gallery -->
-<section>
-  <div class="container">
-    <div class="owl-carousel">
-    <!-- Render images from hiker gallery -->
-        {% for img in trail.gallery %}
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="{{ img.img_url }}" />
-        {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- Trail Reviews -->
-<section>
-  <div class="container">
-    <ul class="collapsible">
-    {% for review in reviews %}
-      <li>
-        <div class="collapsible-header">
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="{{ get_user(review.post_by).profile_img }}"
-                  />
-                  <div class="hiker-name">{{ get_user(review.post_by).name }}</div>
-                  <div class="container">
-                {% if review.trail_status == "completed" %}
-                    <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
-                {% else %}
-                    <span><i class="fas fa-plus-circle plan-icon"></i> Planning</span>
-                {% endif %}
-                  </div>
-                </div>
-                <div class="col s12 m8 review-header">
-                  <div class="container review-stars-div">
-
-                  {% if review.review_rating == 5 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 4 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 3 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 2 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 1  %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  </div>
-                  <div class="container trail-review-header">
-                    {{ review.review_header }}
-                  </div>
-                  <p class="trail-review-para">
-                    {{ review.review_post }}
-                  </p>
-            <!-- Delete Post Icon-->
-            {% if session.name ==  get_user(review.post_by).name %}
-              <a href="#delete_trail_{{ review._id }}" class=" modal-trigger" >
-              <span class="hiker-state-value tooltipped" data-tooltip="Delete">
-              <i class="trail-stars far fa-trash-alt"></i></span></a>
-              <!-- "Delete form -->
-                <div id="delete_trail_{{ review._id }}" class="modal">
-                    <div class="modal-content">
-                    <div class="row">
-                    <form class="col s12" method="POST" 
-                    action="{{ url_for('delete_post', review_id=review._id) }}">
-                        <div class="row">
-                            <div class="input-field col s12">
-                            <div>Are you Sure you want to DELETE this post</div>
-                            </div>
-                        </div>
-                    <!-- Submit Btn-->
-                        <div class="row">
-                            <button type="submit" class="modal-close waves-effect waves-light btn red modal-trigger" >DELETE</button>
-                        </div>
-                    </form>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-                  <a class="btn deep-orange lighten-2 trail-action-btn">
-                  comments <i class="fas fa-caret-down"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="collapsible-body">
-        {% for comm in review.comments %}
-          <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m4">
-                  <img
-                    class="review-card-img"
-                    src="{{ get_user(comm.comment_by).profile_img }}"
-                  />
-                  <div class="hiker-name">{{ get_user(comm.comment_by).name }}</div>
-                </div>
-                <p class="trail-review-para">
-                {{ comm.comment_post }}
-                </p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-            <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">Add comment </a>
-        </div>
-
-      <!-- "Add Comment form -->
-        <div id="add_comment_{{ review._id }}" class="modal">
-            <div class="modal-content">
-                <div class="row">
-                {% if session.name %}
-                <form class="col s12" method="POST" action="{{ url_for('add_comment', trail_id=trail._id, review_id=review._id) }}">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="comment_post" name="comment_post" class="materialize-textarea"></textarea>
-                            <label for="comment_post">Write your comment here ..</label>
-                        </div>
-                    </div>
-                <!-- Submit Btn-->
-                    <div class="row">
-                        <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Submit</button>
-                    </div>
-                </form>
-                {% else %}
-                    <div>you need to login to add Comment</div>
-                    <a href="#login_modal_main" class="waves-effect deep-orange lighten-2 btn modal-trigger">Log IN</a>
-                {% endif %}
-                </div>
-            </div>
-        </div>
-      </li>
-    {% endfor %}
-    </ul>
-  </div>
-</section>
 
 
-<!-- Parallax  -->
-<div class="parallax-container">
-  <div class="parallax">
-    <img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"/>
-  </div>
-</div>
-
-
-<!-- More Trails -->
-<section>
-  <div class="container">
-    <div class="cta-header">Find your next trail..</div>
-    <div class="slider owl-carousel more-trail-slider">
-      {% for t in trails %}
-      <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">
-        <div class="card more-trail-card">
-          <div>
-            <img
-              class="more-trail-image"
-              src="{{ t.trail_image }}"
-            />
-          </div>
-          <div class="trail-btm-div">
-            <div class="trail-header trail-btm-info">
-              {{ t.trail_name }}
-            </div>
-            <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
-            </div>
-            <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
-            <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">{{ t.est_time }}</span>
-          </div>
-        </div>
-     </a>
-    {% endfor %}
-    </div>
-    <div class="more-div">
-      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_trails') }}"
-        >All Trails</a
-      >
-    </div>
-  </div>
-</section>
-
-<!-- Join Our Community Section / CTA Sign up Form-->
-{% if session.name %}
-{% else %}
-<section>
-  <div class="container">
-    <div class="cta-header">Join our Community ..</div>
-    <!-- Sign up Modal Trigger -->
-    <div class="sign-up-btn">
-      <a
-        class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-        href="#signupform"
-        >Sign Up</a
-      >
-    </div>
-    <!-- Sign up Modal Form -->
-    <div id="signupform" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">Join HIKINIE</div>
-        <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('signup') }}">
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Name" id="name" name="name" type="text" 
-                minlength="4" maxlength="25" class="validate" required />
-                <label for="name">Name</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Email" id="email" name="email" type="email"
-                 class="validate" required />
-                <label for="email">Email</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="password" id="password" name="password" type="password" minlength="8" class="validate" required/>
-                <label for="password">Password</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" required/>
-                <label for="password_confirmation">Confirm Password</label>
-              </div>
-            </div>
-            <div class="sign-up-btn">
-              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 modal-trigger">
-                Sign Up
-              </button>
-            </div>
-            <a class="modal-close modal-trigger" href="#login_modal"
-              >Already Signed ..Login here
-            </a>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Login Modal Form -->
-    <div id="login_modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">Login</div>
-        <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('login') }}">
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Email" id="login_email" name="login_email" type="email"
-                 class="validate" required />
-                <label for="login_email">Email</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="password" id="login_password" name="login_password" type="password" class="validate" required/>
-                <label for="login_password">Password</label>
-              </div>
-            </div>
-
-            <div class="sign-up-btn">
-              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 ">
-                Login
-              </button>
-            </div>
-            <a class=" modal-trigger" href="#signupform"
-              >Not Signed yet .. sign up here
-            </a>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{% endif %}
-<!-- Parallax  -->
-<div class="parallax-container">
-  <div class="parallax">
-    <img
-      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
-    />
-  </div>
-</div>
-
-<!-- Other Hikers in HIKINIE-->
-<section class="hikers-section">
-  <div class="container">
-    <h2 class="cta-header">Other Hikers ..</h2>
-    <!-- I am using Owl Carousel to show cards , animation added in script.js file-->
-    <div class="slider owl-carousel more-hiker-slider">
-      {% for h in hikers %}
-      <div class="col s12 m4">
-      <div class="card hiker-card">
-        <div>
-          <img class="hiker-card-img"
-            src="{{ h.profile_img }}"
-          />
-        </div>
-        <div class="hiker-name">{{ h.profile_name }}</div>
-        <div class="card-content hiker-bio">
-          <p>{{ h.bio }}</p>
-        </div>
-        <div class="card-action hiker-card-act">
-          <a class="hiker-card-act-btn" href="{{ url_for('hiker_profile', hiker_id=h._id) }}">Visit Profile</a>
-        </div>
-      </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="more-div">
-      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_hikers') }}"
-        >All Hikers</a
-      >
-    </div>
-  </div>
-</section>
-
-<!-- Parallax  -->
-<div class="parallax-container">
-  <div class="parallax">
-    <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"/>
-  </div>
-</div>
 {% endblock %}
