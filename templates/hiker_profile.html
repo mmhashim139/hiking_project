@@ -55,80 +55,6 @@
         data-position="bottom" data-tooltip="Edit Profile" >
         <span class="hiker-state-value"><i class="far fa-edit"></i></span>
       </a>
-      <!-- Edit Profile Form-->
-      <div id="profile_edit" class="modal">
-        <div class="modal-content">
-          <div class="row">
-            <form class="col s12" method="POST" action="{{ url_for('edit_profile') }}">
-              <!-- Profile Name input-->
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Profile Name" id="profile_name" name="profile_name" type="text" class="validate"/>
-                  <label for="profile_name">Profile Name</label>
-                </div>
-              </div>
-              <!-- Bio input-->
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="hiker_bio" name="hiker_bio" class="materialize-textarea" ></textarea>
-                  <label for="hiker_bio">Bio</label>
-                </div>
-              </div>
-              <!-- Social Links-->
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="facebook_link" name="facebook_link" type="text" class="validate" />
-                  <label for="facebook_link"><i class="fab fa-facebook"></i> Facebook link</label>
-                </div>
-                <div class="input-field col s12">
-                  <input id="instagram_link" name="instagram_link" type="text" class="validate" />
-                  <label for="instagram_link"><i class="fab fa-instagram"></i> Instagram link</label>
-                </div>
-                <div class="input-field col s12">
-                  <input id="twitter_link" name="twitter_link" type="text" class="validate" />
-                  <label for="twitter_link"
-                    ><i class="fab fa-twitter-square"></i> Twitter link</label
-                  >
-                </div>
-              </div>
-              <!-- upload profile picture-->
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Paste image url to upload an image" id="profile_img" name="profile_img" type="text" class="validate"/>
-                  <label for="profile_img"></label>
-                </div>
-              </div>
-              <!-- Submit Btn-->
-              <div class="row">
-                <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Edit Profile</button>
-              </div>
-              <!-- Delete Account-->
-              <div>
-              <a href="#delete_account" class="modal-close modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete account</a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    <!-- "Delete Account form -->
-        <div id="delete_account" class="modal">
-            <div class="modal-content">
-            <div class="row">
-                <form class="col s12" method="POST" 
-                action="{{ url_for('delete_account', hiker_id=hiker._id) }}">
-                    <div class="row">
-                        <div class="input-field col s12">
-                        <div>Are you Sure you want to DELETE your account</div>
-                        </div>
-                    </div>
-                <!-- Submit Btn-->
-                    <div class="row">
-                        <button type="submit" class="waves-effect waves-light btn red " >DELETE </button>
-                    </div>
-                </form>
-            </div>
-            </div>
-        </div>
       {% endif %}
     </div>
   </div>
@@ -148,38 +74,6 @@
       </div>
       {% endif %}
 
-    <!-- Upload image to gallery form-->
-    <div id="upload_gla_img" class="modal">
-      <div class="modal-content">
-        <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('add_image') }}">
-            <!-- Select Trail linked to images uploaded-->
-            <div class="input-field col s12">
-              <select id="trail_for_img" name="trail_for_img" class="validate" required>
-                <option value="" disabled selected>Choose the Trail</option>
-                {% for t in trails %}
-                <option value="{{ t.trail_name }}">{{ t.trail_name }}</option>
-                {% endfor %}
-              </select>
-              <label for="trail_for_img">Upload to Gallery</label>
-            </div>
-            <!-- upload Images-->
-            <div class="file-field input-field col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Paste image url to upload an image" id="img_url" name="img_url" type="text" class="validate"/>
-                  <label for="img_url"></label>
-                </div>
-              </div>
-            </div>
-            <!-- Submit Btn-->
-            <div >
-            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2" >Upload Images</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
     <div class="owl-carousel">
     <!-- Render images from hiker gallery -->
         {% for img in hiker.gallery %}
@@ -204,87 +98,6 @@
         href="#add_new_trail"
         >Add new Trail</a
       >
-    </div>
-    <!-- Add trail Modal Form -->
-    <div id="add_new_trail" class="modal">
-      <div class="modal-content">
-        <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('add_new_trail') }}"> 
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="trail_name" id="trail_name" name="trail_name" type="text" />
-                <label for="trail_name">Trail Name</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="trail_county" id="trail_county" name="trail_county" type="text" />
-                <label for="trail_county">Trail County</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="map_location" id="map_location" name="map_location" type="text" />
-                <label for="map_location">Map Location</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="trail_image" id="trail_image" name="trail_image" type="text" />
-                <label for="trail_image">Trail Header image</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="trail_category" id="trail_category" name="trail_category" type="text" />
-                <label for="trail_category">Trail Category</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="description" id="description" name="description" type="text" />
-                <label for="description">Trail Description</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="length" id="length" name="length" type="text" />
-                <label for="length">Trail Length</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="est_time" id="est_time" name="est_time" type="text" />
-                <label for="est_time">Trail Est_time</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="avg_rating" id="avg_rating" name="avg_rating" type="text" />
-                <label for="avg_rating">Trail avg_rating</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="completed" id="completed" name="completed" type="text" />
-                <label for="completed">completed</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="planning" id="planning" name="planning" type="text" />
-                <label for="planning">Planning</label>
-              </div>
-            </div>
-
-            <div class="sign-up-btn">
-              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 ">
-                Add Trail
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -454,9 +267,255 @@
     <div class="sign-up-btn">
       <a
         class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-        href="#signupform"
-        >Sign Up</a
+        href="#signupform">Sign Up</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
+    />
+  </div>
+</div>
+
+<!-- More Trails -->
+
+<section>
+  <div class="container">
+    <div class="cta-header">Find your next trail..</div>
+    <div class="slider owl-carousel more-trail-slider">
+      {% for t in trails %}
+      <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">
+        <div class="card more-trail-card">
+          <div>
+            <img
+              class="more-trail-image"
+              src="{{ t.trail_image }}"
+            />
+          </div>
+          <div class="trail-btm-div">
+            <div class="trail-header trail-btm-info">
+              {{ t.trail_name }}
+            </div>
+            <div>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star"></i></span>
+              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
+              <span><i class="trail-stars far fa-star"></i></span>
+            </div>
+            <span class="trail-state-key trail-btm-info">Length</span>
+            <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
+            <span class="trail-state-key trail-btm-info">Est. Time</span>
+            <span class="trail-state-value trail-btm-info">{{ t.est_time }}</span>
+          </div>
+        </div>
+     </a>
+    {% endfor %}
+    </div>
+    <div class="more-div">
+      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_trails') }}"
+        >All Trails</a
       >
+    </div>
+  </div>
+</section>
+
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"/>
+  </div>
+</div>
+      <!-- Edit Profile Form-->
+      <div id="profile_edit" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <form class="col s12" method="POST" action="{{ url_for('edit_profile') }}">
+              <!-- Profile Name input-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Profile Name" id="profile_name" name="profile_name" type="text" class="validate"/>
+                  <label for="profile_name">Profile Name</label>
+                </div>
+              </div>
+              <!-- Bio input-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="hiker_bio" name="hiker_bio" class="materialize-textarea" ></textarea>
+                  <label for="hiker_bio">Bio</label>
+                </div>
+              </div>
+              <!-- Social Links-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="facebook_link" name="facebook_link" type="text" class="validate" />
+                  <label for="facebook_link"><i class="fab fa-facebook"></i> Facebook link</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="instagram_link" name="instagram_link" type="text" class="validate" />
+                  <label for="instagram_link"><i class="fab fa-instagram"></i> Instagram link</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="twitter_link" name="twitter_link" type="text" class="validate" />
+                  <label for="twitter_link"
+                    ><i class="fab fa-twitter-square"></i> Twitter link</label
+                  >
+                </div>
+              </div>
+              <!-- upload profile picture-->
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Paste image url to upload an image" id="profile_img" name="profile_img" type="text" class="validate"/>
+                  <label for="profile_img"></label>
+                </div>
+              </div>
+              <!-- Submit Btn-->
+              <div class="row">
+                <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger" >Edit Profile</button>
+              </div>
+              <!-- Delete Account-->
+              <div>
+              <a href="#delete_account" class="modal-close modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete account</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <!-- "Delete Account form -->
+        <div id="delete_account" class="modal">
+            <div class="modal-content">
+            <div class="row">
+                <form class="col s12" method="POST" 
+                action="{{ url_for('delete_account', hiker_id=hiker._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <div>Are you Sure you want to DELETE your account</div>
+                        </div>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="waves-effect waves-light btn red " >DELETE </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    <!-- Upload image to gallery form-->
+    <div id="upload_gla_img" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12" method="POST" action="{{ url_for('add_image') }}">
+            <!-- Select Trail linked to images uploaded-->
+            <div class="input-field col s12">
+              <select id="trail_for_img" name="trail_for_img" class="validate" required>
+                <option value="" disabled selected>Choose the Trail</option>
+                {% for t in trails %}
+                <option value="{{ t.trail_name }}">{{ t.trail_name }}</option>
+                {% endfor %}
+              </select>
+              <label for="trail_for_img">Upload to Gallery</label>
+            </div>
+            <!-- upload Images-->
+            <div class="file-field input-field col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Paste image url to upload an image" id="img_url" name="img_url" type="text" class="validate"/>
+                  <label for="img_url"></label>
+                </div>
+              </div>
+            </div>
+            <!-- Submit Btn-->
+            <div >
+            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2" >Upload Images</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Add trail Modal Form -->
+    <div id="add_new_trail" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12" method="POST" action="{{ url_for('add_new_trail') }}"> 
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_name" id="trail_name" name="trail_name" type="text" />
+                <label for="trail_name">Trail Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_county" id="trail_county" name="trail_county" type="text" />
+                <label for="trail_county">Trail County</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="map_location" id="map_location" name="map_location" type="text" />
+                <label for="map_location">Map Location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_image" id="trail_image" name="trail_image" type="text" />
+                <label for="trail_image">Trail Header image</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="trail_category" id="trail_category" name="trail_category" type="text" />
+                <label for="trail_category">Trail Category</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="description" id="description" name="description" type="text" />
+                <label for="description">Trail Description</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="length" id="length" name="length" type="text" />
+                <label for="length">Trail Length</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="est_time" id="est_time" name="est_time" type="text" />
+                <label for="est_time">Trail Est_time</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="avg_rating" id="avg_rating" name="avg_rating" type="text" />
+                <label for="avg_rating">Trail avg_rating</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="completed" id="completed" name="completed" type="text" />
+                <label for="completed">completed</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="planning" id="planning" name="planning" type="text" />
+                <label for="planning">Planning</label>
+              </div>
+            </div>
+
+            <div class="sign-up-btn">
+              <button type="submit" class=" waves-effect waves-light btn deep-orange lighten-2 ">
+                Add Trail
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <!-- Sign up Modal Form -->
     <div id="signupform" class="modal">
@@ -534,65 +593,4 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-{% endif %}
-<!-- Parallax  -->
-<div class="parallax-container">
-  <div class="parallax">
-    <img
-      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
-    />
-  </div>
-</div>
-
-<!-- More Trails -->
-
-<section>
-  <div class="container">
-    <div class="cta-header">Find your next trail..</div>
-    <div class="slider owl-carousel more-trail-slider">
-      {% for t in trails %}
-      <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">
-        <div class="card more-trail-card">
-          <div>
-            <img
-              class="more-trail-image"
-              src="{{ t.trail_image }}"
-            />
-          </div>
-          <div class="trail-btm-div">
-            <div class="trail-header trail-btm-info">
-              {{ t.trail_name }}
-            </div>
-            <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
-            </div>
-            <span class="trail-state-key trail-btm-info">Length</span>
-            <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
-            <span class="trail-state-key trail-btm-info">Est. Time</span>
-            <span class="trail-state-value trail-btm-info">{{ t.est_time }}</span>
-          </div>
-        </div>
-     </a>
-    {% endfor %}
-    </div>
-    <div class="more-div">
-      <a class="waves-effect waves-light btn deep-orange lighten-2" href="{{ url_for('all_trails') }}"
-        >All Trails</a
-      >
-    </div>
-  </div>
-</section>
-
-<!-- Parallax  -->
-<div class="parallax-container">
-  <div class="parallax">
-    <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/adult-1850181_960_720.jpg"/>
-  </div>
-</div>
 {% endblock %}
