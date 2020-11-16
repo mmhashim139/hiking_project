@@ -79,16 +79,10 @@
       <div class="card">
         <div class="row">
           <div class="card-image col s12 m4">
-            <img
-              src="{{ trail.trail_image }}"
-            />
-            <div>
-            <div class="trail-btm-div">
-            <a href="#"><i class="fas fa-check-circle completed-icon"></i> Completed</a>
-            <a href="#"><i class="fas fa-plus-circle plan-icon"></i> Plan to</a>
-            </div>
-            </div>
-          </div>
+            <img src="{{ trail.trail_image }}"/>
+          <div>
+        </div>
+      </div>
           <div class="card-content col s12 m8">
             <div class="trail-header">
               {{ trail.trail_name }}
@@ -143,12 +137,6 @@
           />
         </div>
         <div class="hiker-name">{{ hiker.profile_name }}</div>
-        <div class="hiker-state">
-          <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">{{ hiker.completed }}</span>
-          <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">{{ hiker.planing }}</span>
-        </div>
         <div class="card-content hiker-bio">
           <p>{{ hiker.bio }}</p>
         </div>

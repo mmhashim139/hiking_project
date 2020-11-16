@@ -26,12 +26,6 @@
       />
     </div>
     <div class="hiker-name">{{ hiker.profile_name }}</div>
-    <div class="hiker-state">
-      <span class="hiker-state-key">Completed</span>
-      <span class="hiker-state-value">3</span>
-      <span class="hiker-state-key">Planing</span>
-      <span class="hiker-state-value">2</span>
-    </div>
     <div class="hiker-socials">
       <a
         class="hiker-socials-icon"
@@ -142,14 +136,18 @@
 <!-- Hiker Gallery section -->
 <section>
   <div class="container">
-    <h3 class="cta-header">
-      {{ hiker.profile_name }} Gallery
+  {% if hiker.gallery %}
+    <h3 class="cta-header">{{ hiker.profile_name }} Gallery </h3>
+  {% endif %}
+
        {% if session.name == hiker.name %}
+       <div class="row center-align">
       <a href="#upload_gla_img" class="tooltipped modal-trigger tooltipped" data-position="bottom" data-tooltip="Add Image">
-        <span class="hiker-state-value"><i class="far fa-plus-square"></i></span>
+        <span class="hiker-state-value">Upload Images<i class="far fa-plus-square"></i></span>
       </a>
+      </div>
       {% endif %}
-    </h3>
+
     <!-- Upload image to gallery form-->
     <div id="upload_gla_img" class="modal">
       <div class="modal-content">
@@ -186,7 +184,7 @@
     <!-- Render images from hiker gallery -->
         {% for img in hiker.gallery %}
       <img
-        class="hiker-gallery-img materialboxed"
+        class="hiker-gallery-img"
         src="{{ img.img_url }}" />
 
         {% endfor %}

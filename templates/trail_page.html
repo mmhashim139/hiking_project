@@ -36,12 +36,6 @@
           <span><i class="trail-stars far fa-star"></i></span>
         </div>
         <div>
-          <span class="trail-state-key">Completed</span>
-          <span class="hiker-state-value">{{ trail.completed }}</span>
-          <span class="trail-state-key">Planing</span>
-          <span class="hiker-state-value">{{ trail.planning }}</span>
-        </div>
-        <div>
           <span class="trail-state-key">Length</span>
           <span class="trail-state-value">{{ trail.length }}</span>
           <span class="trail-state-key">Est. Time</span>
@@ -273,30 +267,6 @@
         class="hiker-gallery-img materialboxed"
         src="{{ img.img_url }}" />
         {% endfor %}
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2016/03/09/09/43/person-1245959_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2017/02/26/11/57/mountaineer-2100050_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2017/06/21/13/20/mountain-climber-2427191_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2014/03/26/21/00/climber-299018_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2015/06/08/15/29/mountain-climbing-802099_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2015/11/07/11/55/hiking-1031628_960_720.jpg"
-      />
     </div>
   </div>
 </section>
@@ -317,12 +287,6 @@
                     src="{{ get_user(review.post_by).profile_img }}"
                   />
                   <div class="hiker-name">{{ get_user(review.post_by).name }}</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">4</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">2</span>
-                  </div>
                   <div class="container">
                 {% if review.trail_status == "completed" %}
                     <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
@@ -389,12 +353,6 @@
                     src="{{ get_user(comm.comment_by).profile_img }}"
                   />
                   <div class="hiker-name">{{ get_user(comm.comment_by).name }}</div>
-                  <div class="hiker-state">
-                    <span class="hiker-state-key">Completed</span>
-                    <span class="hiker-state-value">4</span>
-                    <span class="hiker-state-key">Planing</span>
-                    <span class="hiker-state-value">2</span>
-                  </div>
                 </div>
                 <p class="trail-review-para">
                 {{ comm.comment_post }}
@@ -604,12 +562,6 @@
           />
         </div>
         <div class="hiker-name">{{ h.profile_name }}</div>
-        <div class="hiker-state">
-          <span class="hiker-state-key">Completed</span>
-          <span class="hiker-state-value">{{ h.completed }}</span>
-          <span class="hiker-state-key">Planing</span>
-          <span class="hiker-state-value">{{ h.planing }}</span>
-        </div>
         <div class="card-content hiker-bio">
           <p>{{ h.bio }}</p>
         </div>
