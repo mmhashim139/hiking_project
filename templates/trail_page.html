@@ -222,6 +222,31 @@
                   <p class="trail-review-para">
                     {{ review.review_post }}
                   </p>
+            <!-- Delete Post Icon-->
+            {% if session.name ==  get_user(review.post_by).name %}
+              <a href="#delete_trail_{{ review._id }}" class=" modal-trigger" >
+              <span class="hiker-state-value tooltipped" data-tooltip="Delete">
+              <i class="trail-stars far fa-trash-alt"></i></span></a>
+              <!-- "Delete form -->
+                <div id="delete_trail_{{ review._id }}" class="modal">
+                    <div class="modal-content">
+                    <div class="row">
+                    <form class="col s12" method="POST" 
+                    action="{{ url_for('delete_post', trail_id=trail._id, review_id=review._id) }}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <div>Are you Sure you want to DELETE this post</div>
+                            </div>
+                        </div>
+                    <!-- Submit Btn-->
+                        <div class="row">
+                            <button type="submit" class="modal-close waves-effect waves-light btn red modal-trigger" >DELETE</button>
+                        </div>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
                   <a class="btn deep-orange lighten-2 trail-action-btn">
                   comments <i class="fas fa-caret-down"></i></a>
                 </div>
