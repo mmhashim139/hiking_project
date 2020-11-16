@@ -40,11 +40,19 @@ def all_hikers():
     return render_template("hikers.html", hikers=hikers)
 
 
+# get user data into reviews section
+@app.route("/get_trail/<id>")
+def get_trail(id):
+    return mongo.db.trails.find_one({"_id": ObjectId(id)})
+
+
 # show Hiker profile page
 @app.route("/hiker_profile/<hiker_id>", methods=["GET", "POST"])
 def hiker_profile(hiker_id):
     hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", hiker=hiker)
+    hiker_id = hiker["_id"]
+    reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
+    return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail)
 
 
 # show Hiker profile page for logedIn user
@@ -52,7 +60,9 @@ def hiker_profile(hiker_id):
 def my_account(name):
     name = mongo.db.users.find_one({"name": session["name"]})["name"]
     hiker = mongo.db.users.find_one({"name": session["name"]})
-    return render_template("hiker_profile.html", name=name, hiker=hiker)
+    hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
+    reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
+    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
 
 
 # get user data into reviews section
@@ -190,8 +200,8 @@ def planning_trail(trail_id):
     mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
         {"trail_id": newtrail["trail_id"],
         "trail_status": newtrail["trail_status"],
-        "plan_header": newtrail["plan_header"],
-        "plan_post" : newtrail["plan_post"]
+        "review_header": newtrail["plan_header"],
+        "review_post" : newtrail["plan_post"]
         }}})
     mongo.db.reviews.insert_one(newtrail)
     flash("Trail Added to your plan")
