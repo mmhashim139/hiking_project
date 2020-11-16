@@ -183,7 +183,7 @@
     <div id="edit_trail" class="modal">
       <div class="modal-content">
         <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('edit_trail' ) }}"> 
+          <form class="col s12" method="POST" action="{{ url_for('edit_trail', trail_id=trail._id ) }}"> 
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="trail_name" id="trail_name" name="trail_name" type="text" />
@@ -350,7 +350,7 @@
                     <div class="modal-content">
                     <div class="row">
                     <form class="col s12" method="POST" 
-                    action="{{ url_for('delete_post', trail_id=trail._id, review_id=review._id) }}">
+                    action="{{ url_for('delete_post', review_id=review._id) }}">
                         <div class="row">
                             <div class="input-field col s12">
                             <div>Are you Sure you want to DELETE this post</div>
