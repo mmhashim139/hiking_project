@@ -251,7 +251,7 @@ def completed_trail(trail_id):
             "post_by": hiker,
             "trail_status": "completed",
             "review_header": request.form.get("review_header"),
-            "review_rating": request.form.get("review_rating"),
+            "review_rating": int(request.form.get("review_rating")),
             "review_post": request.form.get("review_post")
             }
     mongo.db.users.update({"name": session["name"]}, {"$push": {"Added_trails":
