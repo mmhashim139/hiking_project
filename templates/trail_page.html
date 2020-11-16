@@ -144,6 +144,39 @@
   </div>
 </section>
 
+<!-- Delete Trail -->
+       {% if session.name == "admin" %}
+<section>
+    <!-- Delete trail-->
+    <div class="container">
+    <div class="btn white">
+              <div>
+              <a href="#delete_trail" class=" modal-trigger red-text text-darken-2" ><i class="trail-stars far fa-trash-alt"></i> Delete trail</a>
+              </div>
+    </div>
+    </div>
+    <!-- "Delete Trail form -->
+        <div id="delete_trail" class="modal">
+            <div class="modal-content">
+            <div class="row">
+                <form class="col s12" method="POST" 
+                action="{{ url_for('delete_trail', trail_id=trail._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <div>Are you Sure you want to DELETE This Trail</div>
+                        </div>
+                    </div>
+                <!-- Submit Btn-->
+                    <div class="row">
+                        <button type="submit" class="waves-effect waves-light btn red" >DELETE </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+</section>
+      {%  endif %}
+
 <!-- Trail Gallery -->
 <section>
   <div class="container">
