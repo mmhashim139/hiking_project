@@ -12,10 +12,12 @@
         {% endif %}
     {% endwith %}
  </section>
-<section>
+
   <!-- Hiker profile Header 
     Showes Hiker Details like image , name bio etc..
     -->
+
+<section>
   <div class="container">
     <div class="profile-header">
       <img
@@ -97,14 +99,9 @@
               </div>
               <!-- upload profile picture-->
               <div class="row">
-                <div class="file-field input-field">
-                  <div class="btn">
-                    <span><i class="fas fa-cloud-upload-alt"></i></span>
-                    <input type="file" />
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" placeholder="Upload Image" type="text"/>
-                  </div>
+                <div class="input-field col s12">
+                  <input placeholder="Paste image url to upload an image" id="profile_img" name="profile_img" type="text" class="validate"/>
+                  <label for="profile_img"></label>
                 </div>
               </div>
               <!-- Submit Btn-->
@@ -147,83 +144,52 @@
   <div class="container">
     <h3 class="cta-header">
       {{ hiker.profile_name }} Gallery
-      <a
-        href="#upload_gla_img"
-        class="tooltipped modal-trigger tooltipped"
-        data-position="bottom"
-        data-tooltip="Add Image"
-      >
-        <span class="hiker-state-value"
-          ><i class="far fa-plus-square"></i
-        ></span>
+       {% if session.name == hiker.name %}
+      <a href="#upload_gla_img" class="tooltipped modal-trigger tooltipped" data-position="bottom" data-tooltip="Add Image">
+        <span class="hiker-state-value"><i class="far fa-plus-square"></i></span>
       </a>
+      {% endif %}
     </h3>
     <!-- Upload image to gallery form-->
     <div id="upload_gla_img" class="modal">
       <div class="modal-content">
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" method="POST" action="{{ url_for('add_image') }}">
             <!-- Select Trail linked to images uploaded-->
             <div class="input-field col s12">
-              <select>
+              <select id="trail_for_img" name="trail_for_img" class="validate" required>
                 <option value="" disabled selected>Choose the Trail</option>
-                <option value="1">Trail A</option>
-                <option value="2">Trail B</option>
-                <option value="3">Trail C</option>
+                {% for t in trails %}
+                <option value="{{ t.trail_name }}">{{ t.trail_name }}</option>
+                {% endfor %}
               </select>
-              <label>Upload to Gallery</label>
+              <label for="trail_for_img">Upload to Gallery</label>
             </div>
             <!-- upload Images-->
             <div class="file-field input-field col s12">
-              <div class="btn">
-                <span><i class="fas fa-cloud-upload-alt"></i></span>
-                <input type="file" multiple />
-              </div>
-              <div class="file-path-wrapper">
-                <input
-                  class="file-path validate"
-                  type="text"
-                  placeholder="Upload images"
-                />
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Paste image url to upload an image" id="img_url" name="img_url" type="text" class="validate"/>
+                  <label for="img_url"></label>
+                </div>
               </div>
             </div>
             <!-- Submit Btn-->
-            <div class="">
-              <a
-                href="#!"
-                class="modal-close waves-effect waves-light btn green lighten-2 modal-trigger"
-                >Upload Images</a
-              >
+            <div >
+            <button type="submit" class="modal-close waves-effect waves-light btn green lighten-2" >Upload Images</button>
             </div>
           </form>
         </div>
       </div>
     </div>
     <div class="owl-carousel">
+    <!-- Render images from hiker gallery -->
+        {% for img in hiker.gallery %}
       <img
         class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2016/03/09/09/43/person-1245959_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2017/02/26/11/57/mountaineer-2100050_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2017/06/21/13/20/mountain-climber-2427191_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2014/03/26/21/00/climber-299018_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2015/06/08/15/29/mountain-climbing-802099_960_720.jpg"
-      />
-      <img
-        class="hiker-gallery-img materialboxed"
-        src="https://cdn.pixabay.com/photo/2015/11/07/11/55/hiking-1031628_960_720.jpg"
-      />
+        src="{{ img.img_url }}" />
+
+        {% endfor %}
     </div>
   </div>
 </section>
