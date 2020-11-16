@@ -285,8 +285,8 @@ def add_comment(review_id, trail_id):
 
 
 # Delete Post
-@app.route("/delete_post/<review_id>/<trail_id>", methods=["GET", "POST"])
-def delete_post(review_id, trail_id):
+@app.route("/delete_post/<review_id>", methods=["GET", "POST"])
+def delete_post(review_id):
     if request.method == "POST":
         review_id = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})["_id"]
         hiker = mongo.db.users.find_one({"name": session["name"]})["_id"]
