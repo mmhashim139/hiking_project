@@ -109,8 +109,15 @@
                     <div class="row">
                         <div class="input-field col s12">
                         <!-- Rating Stars -->
-                            <input id="review_rating" name="review_rating" type="text" class="validate">
-                            <label for="review_rating">rating</label>
+                            <select id="review_rating" name="review_rating" class="validate" required>
+                                <option value="" disabled selected>Rate the Trail</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                                <label for="review_rating">Trail Rating</label>
                         </div>
                     </div>
                     <div class="row">
@@ -297,12 +304,42 @@
                 </div>
                 <div class="col s12 m8 review-header">
                   <div class="container review-stars-div">
-                  {{ review.review_rating }}
+
+                  {% if review.review_rating == 5 %}
                     <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star-half-alt"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 4 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
                     <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 3 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 2 %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
+                  {% if review.review_rating == 1  %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    <span><i class="trail-stars far fa-star"></i></span>
+                  {% endif %}
                   </div>
                   <div class="container trail-review-header">
                     {{ review.review_header }}
