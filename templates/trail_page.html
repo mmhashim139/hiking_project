@@ -29,11 +29,13 @@
         <span class="trail-county">{{ trail.trail_county }}</span>
         <span class="trail-category">{{ trail.trail_category }}</span>
         <div>
-          <span><i class="trail-stars fas fa-star"></i></span>
-          <span><i class="trail-stars fas fa-star"></i></span>
-          <span><i class="trail-stars fas fa-star"></i></span>
-          <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-          <span><i class="trail-stars far fa-star"></i></span>
+        <!-- get rating average for this trail and represent it as a stars  -->
+            {% for r in  range(get_avg_rating(trail._id)) %}
+            <span><i class="trail-stars fas fa-star"></i></span>
+            {% endfor %}
+            {% for r in  range(5 - get_avg_rating(trail._id)) %}
+            <span><i class="trail-stars far fa-star"></i></span>
+            {% endfor %}
         </div>
         <div>
           <span class="trail-state-key">Length</span>
@@ -120,42 +122,15 @@
                 </div>
                 <div class="col s12 m8 review-header">
                   <div class="container review-stars-div">
-
-                  {% if review.review_rating == 5 %}
+                <!-- get review rating  and represent it as a stars  -->
+                {% if review.review_rating %}
+                    {% for r in  range(review.review_rating) %}
                     <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 4 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
+                    {% endfor %}
+                    {% for r in  range(5 - review.review_rating) %}
                     <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 3 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 2 %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
-                  {% if review.review_rating == 1  %}
-                    <span><i class="trail-stars fas fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                    <span><i class="trail-stars far fa-star"></i></span>
-                  {% endif %}
+                    {% endfor %}
+                {% endif %}
                   </div>
                   <div class="container trail-review-header">
                     {{ review.review_header }}
@@ -274,11 +249,13 @@
               {{ t.trail_name }}
             </div>
             <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
+            <!-- get rating average for this trail and represent it as a stars  -->
+                {% for r in  range(get_avg_rating(t._id)) %}
+                <span><i class="trail-stars fas fa-star"></i></span>
+                {% endfor %}
+                {% for r in  range(5 - get_avg_rating(t._id)) %}
+                <span><i class="trail-stars far fa-star"></i></span>
+                {% endfor %}
             </div>
             <span class="trail-state-key trail-btm-info">Length</span>
             <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
