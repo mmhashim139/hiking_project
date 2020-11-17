@@ -136,12 +136,15 @@
                 {{ review.review_header }}
               </div>
               <div>
-              {{ review.review_rating }}
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star"></i></span>
-                <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-                <span><i class="trail-stars far fa-star"></i></span>
+              {% if review.review_rating %}
+                <!-- get review rating  and represent it as a stars  -->
+                    {% for r in  range(review.review_rating) %}
+                    <span><i class="trail-stars fas fa-star"></i></span>
+                    {% endfor %}
+                    {% for r in  range(5 - review.review_rating) %}
+                    <span><i class="trail-stars far fa-star"></i></span>
+                    {% endfor %}
+              {% endif %}
               </div>
               <p class="trail-review-para">
               {{ review.review_post }}
@@ -301,11 +304,13 @@
               {{ t.trail_name }}
             </div>
             <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
+            <!-- get rating average for this trail and represent it as a stars  -->
+                {% for r in  range(get_avg_rating(t._id)) %}
+                <span><i class="trail-stars fas fa-star"></i></span>
+                {% endfor %}
+                {% for r in  range(5 - get_avg_rating(t._id)) %}
+                <span><i class="trail-stars far fa-star"></i></span>
+                {% endfor %}
             </div>
             <span class="trail-state-key trail-btm-info">Length</span>
             <span class="trail-state-value trail-btm-info">{{ t.length }}</span>
