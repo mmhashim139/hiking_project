@@ -320,9 +320,7 @@
 }
 
 
-.review-stars-div  {
-
-}
- .trail-review-header{
-
+.add-comment, .comments {
+    color: rgb(255, 81, 28);
+    font-size: 18px;
 }
