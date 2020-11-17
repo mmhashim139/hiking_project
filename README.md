@@ -46,7 +46,8 @@ Hiker is website user with valid account , along with above can :
 ### Design 
 The website bullit to be simple and acheive users goal 
 Mockups refrence :
-- [Mockup-Desktop-home-page](static/assests/mockups/desktop-home page.png)
+
+- [Mockup-Desktop-home-page](static/assests/mockups/desktop-home-page.png)
 - [Mockup-Desktop-All-Trails](static/assests/mockups/desktop-allplaces.png)
 - [Mockup-Desktop-Hiker-PAge](static/assests/mockups/desktop-userprofile.png)
 - [Mockup-Desktop-Trail-Page](static/assests/mockups/desktop-hiking-place-page.png)
