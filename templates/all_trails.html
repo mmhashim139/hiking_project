@@ -38,11 +38,12 @@
               {{ trail.trail_name }}
             </div>
             <div>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star"></i></span>
-              <span><i class="trail-stars fas fa-star-half-alt"></i></span>
-              <span><i class="trail-stars far fa-star"></i></span>
+                {% for r in  range(get_avg_rating(trail._id)) %}
+                <span><i class="trail-stars fas fa-star"></i></span>
+                {% endfor %}
+                {% for r in  range(5 - get_avg_rating(trail._id)) %}
+                <span><i class="trail-stars far fa-star"></i></span>
+                {% endfor %}
             </div>
             <span class="trail-county">{{ trail.trail_county }}</span>
             <span class="trail-category">{{ trail.trail_category }}</span>
