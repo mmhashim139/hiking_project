@@ -57,7 +57,7 @@ def hiker_profile(hiker_id):
     return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails, get_avg_rating=get_avg_rating)
 
 
-# show Hiker profile page for logedIn user
+# show my account page for logedIn user
 @app.route("/hiker_page/<name>", methods=["GET", "POST"])
 def my_account(name):
     hikers = list(mongo.db.users.find())
@@ -209,9 +209,10 @@ def delete_trail(trail_id):
     if request.method == "POST":
         trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     mongo.db.trails.remove({"_id": ObjectId(trail_id)})
+    # remove reviews for trailed removed
+    mongo.db.reviews.remove({"trail_id": ObjectId(trail_id)})
     flash("Trail Deleted")
-    trails = list(mongo.db.trails.find())
-    return render_template("all_trails.html", trails=trails, get_avg_rating=get_avg_rating)
+    return redirect(url_for("all_trails"))
 
 
 # Add a trail to planned trails with post
@@ -303,7 +304,7 @@ def delete_post(review_id):
     return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail, get_avg_rating=get_avg_rating)
 
 
-# Add a trail to completed trails
+# Add a new trail
 @app.route("/add_new_trail", methods=["GET", "POST"])
 def add_new_trail():
     if request.method == "POST":
@@ -315,17 +316,11 @@ def add_new_trail():
             "trail_category": request.form.get("trail_category"),
             "description": request.form.get("description"),
             "length": request.form.get("length"),
-            "est_time": request.form.get("est_time"),
-            "avg_rating": request.form.get("avg_rating"),
-            "completed": request.form.get("completed"),
-            "planning": request.form.get("planning")
+            "est_time": request.form.get("est_time")
             }
     mongo.db.trails.insert_one(newtrail)
     flash("Trail Added")
-    trail = mongo.db.trails.find_one({"name": newtrail["trail_name"]})
-    reviews = ""
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
-
+    return redirect(url_for("all_trails"))
 
 # Edit a trail info
 @app.route("/edit_trail/<trail_id>", methods=["GET", "POST"])
@@ -341,9 +336,6 @@ def edit_trail(trail_id):
         description = request.form.get("description")
         length = request.form.get("length")
         est_time = request.form.get("est_time")
-        avg_rating = request.form.get("avg_rating")
-        completed = request.form.get("completed")
-        planning = request.form.get("planning")
     mongo.db.trails.update_many(
         {"_id": ObjectId(trail_id)}, [{"$set":{
             "trail_name": {"$cond": [{"$eq": [trail_name, ""]}, trail["trail_name"], trail_name]},
@@ -354,18 +346,11 @@ def edit_trail(trail_id):
             "description": {"$cond": [{"$eq": [description, ""]}, trail["description"], description]},
             "length": {"$cond": [{"$eq": [length, ""]}, trail["length"], length]},
             "est_time": {"$cond": [{"$eq": [est_time, ""]}, trail["est_time"], est_time]},
-            "avg_rating": {"$cond": [{"$eq": [avg_rating, ""]}, trail["avg_rating"], avg_rating]},
-            "completed": {"$cond": [{"$eq": [completed, ""]}, trail["completed"], completed]},
-            "planning": {"$cond": [{"$eq": [planning, ""]}, trail["planning"], planning]},
         }}], upsert=True)
     flash("Trail Edited ")
-    trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
-    trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
-    reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
+    return redirect(url_for("all_trails"))
 
-
-# add image route 
+# add image route function
 @app.route("/add_image", methods=["GET", "POST"])
 def add_image():
     hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
@@ -394,11 +379,15 @@ def add_image():
 @app.route("/get_avg_rating/<id>")
 def get_avg_rating(id):
     ratings = list(mongo.db.reviews.find({"trail_id": ObjectId(id),"trail_status" :"completed"},["review_rating"]))
-    r = 0
-    for rate in ratings:
-        r = r + rate["review_rating"]
-        average_rating = round((r / len(ratings)), 0)
-    return int(average_rating)
+    if ratings :
+        r = 0
+        for rate in ratings:
+            r = r + rate["review_rating"]
+            average_rating = round((r / len(ratings)), 0)
+        return int(average_rating)
+    else:
+    # for new trails 
+        return  int("5")
 
 
 # make sure to debug= False before submit
