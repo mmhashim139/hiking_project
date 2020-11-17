@@ -1,7 +1,7 @@
 
 # Hikini 
 
-![HIKINIE](static/mockups/hikinie.png)
+![HIKINIE](static/assets/mockups/hikinie.png)
 
 HIKINIE , Hiking In ireland 
 A website for hikers to find best trails in Ireland , create their profiles , upload images & reviews 
@@ -46,10 +46,10 @@ Hiker is website user with valid account , along with above can :
 ### Design 
 The website bullit to be simple and acheive users goal 
 Mockups refrence :
-[Mockup-Desktop-home-page](static/mockups/desktop-home page.png)
-[Mockup-Desktop-All-Trails](static/mockups/desktop-allplaces.png)
-[Mockup-Desktop-Hiker-PAge](static/mockups/desktop-userprofile.png)
-[Mockup-Desktop-Trail-Page](static/mockups/desktop-hiking-place-page.png)
+- [Mockup-Desktop-home-page](static/assests/mockups/desktop-home page.png)
+- [Mockup-Desktop-All-Trails](static/assests/mockups/desktop-allplaces.png)
+- [Mockup-Desktop-Hiker-PAge](static/assests/mockups/desktop-userprofile.png)
+- [Mockup-Desktop-Trail-Page](static/assests/mockups/desktop-hiking-place-page.png)
 
 
 ## Features
