@@ -1,7 +1,7 @@
 
 # Hikini 
 
-[HIKINIE](https://hiking-ireland.herokuapp.com/)
+![HIKINIE](static/mockups/hikinie.png)
 
 HIKINIE , Hiking In ireland 
 A website for hikers to find best trails in Ireland , create their profiles , upload images & reviews 
