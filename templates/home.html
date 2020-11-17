@@ -17,7 +17,7 @@
       <div class="caption center-align">
         <h2>Best Trails To Hike In Ireland</h2>
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-          Lorem ipsum dolor sit amet consectetur
+          Find Best Trails To Hike In Ireland and start planning
         </h5>
         <a href="{{ url_for('all_trails') }}" class="btn btn-large deep-orange lighten-2">See Trails</a>
       </div>
@@ -30,7 +30,7 @@
       <div class="caption left-align">
         <h2>Most Popular Hiking Trails</h2>
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-          Lorem ipsum dolor sit amet
+          Find Best Trails To Complete and show in your profile
         </h5>
         <a href="{{ url_for('all_trails') }}" class="btn btn-large deep-orange lighten-2">See Trails</a>
       </div>
@@ -43,7 +43,7 @@
       <div class="caption right-align">
         <h2>Meet Fellow Hikers</h2>
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-          Lorem ipsum dolor sit amet!
+          Join Our community of hikers , share reviews & your plan
         </h5>
         <a href="{{ url_for('all_hikers') }}" class="btn btn-large deep-orange lighten-2">Find Hikers</a>
       </div>
@@ -56,7 +56,7 @@
       <div class="caption left-align">
         <h2>Organise Hikes Together</h2>
         <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-          Veniam non illo earum cumque id est!
+          Get in touch with other hikers and share experiance
         </h5>
         <a href="{{ url_for('all_hikers') }}" class="btn btn-large deep-orange lighten-2">Find Hikers</a>
       </div>
@@ -73,7 +73,7 @@
   <!-- trails cards Container-->
   <div class="container">
     <h2 class="header">Best To HIKINIE</h2>
-    <div class="sub-header">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, consectetur.</div>
+    <div class="sub-header">Best Trails To Hike In Ireland with details that you need to start planning</div>
 {% for trail in trails %}
     <!-- trail Card-->
     <div class="col s12 m7">
@@ -125,10 +125,19 @@
 -->
 {% block hikers %}
 
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img
+      src="https://cdn.pixabay.com/photo/2016/01/19/17/12/mountains-landscape-1149580_960_720.jpg"
+    />
+  </div>
+</div>
+
 <section class="hikers-section">
   <div class="container">
     <h2 class="header">Hikers in HIKINIE</h2>
-    <div class="sub-header">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, consectetur.</div>
+    <div class="sub-header">Our Community of Hikers , We share reviews and planning tips</div>
     <!-- I am using Owl Carousel to show cards , animation added in script.js file-->
     <div class="slider owl-carousel">
       {% for hiker in hikers %}
@@ -151,4 +160,29 @@
   </div>
 </section>
 
+<!-- Parallax  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"/>
+  </div>
+</div>
+
+<!-- Join Our Community Section / CTA Sign up Form-->
+{% if session.name %}
+{% else %}
+<section>
+  <div class="container">
+    <div class="header">Join our Community ..</div>
+    <div class="sub-header">Join Our community of hikers , share reviews & your plan</div>
+    <!-- Sign up Modal Trigger -->
+    <div class="sign-up-btn">
+      <a
+        class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
+        href="#signupform"
+        >Sign Up</a
+      >
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}
