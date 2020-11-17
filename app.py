@@ -23,14 +23,14 @@ mongo = PyMongo(app)
 def home_page():
     hikers = list(mongo.db.users.find())
     trails = list(mongo.db.trails.find())
-    return render_template("home.html", hikers=hikers, trails=trails)
+    return render_template("home.html", hikers=hikers, trails=trails, get_avg_rating=get_avg_rating)
 
 
 # show All places in Hiking places page
 @app.route("/all_trails")
 def all_trails():
     trails = list(mongo.db.trails.find())
-    return render_template("all_trails.html", trails=trails)
+    return render_template("all_trails.html", trails=trails, get_avg_rating=get_avg_rating)
 
 
 # show All places in Hiking places page
@@ -54,7 +54,7 @@ def hiker_profile(hiker_id):
     hiker = mongo.db.users.find_one({"_id": ObjectId(hiker_id)})
     hiker_id = hiker["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails)
+    return render_template("hiker_profile.html", hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails, get_avg_rating=get_avg_rating)
 
 
 # show Hiker profile page for logedIn user
@@ -66,7 +66,7 @@ def my_account(name):
     hiker = mongo.db.users.find_one({"name": session["name"]})
     hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails)
+    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail, hikers=hikers, trails=trails, get_avg_rating=get_avg_rating)
 
 
 # get user data into reviews section
@@ -82,7 +82,7 @@ def trail_page(trail_id):
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
     hikers = list(mongo.db.users.find())
     trails = list(mongo.db.trails.find())
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, hikers=hikers, trails=trails)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, hikers=hikers, trails=trails, get_avg_rating=get_avg_rating)
 
 
 # sign_up Function
@@ -211,7 +211,7 @@ def delete_trail(trail_id):
     mongo.db.trails.remove({"_id": ObjectId(trail_id)})
     flash("Trail Deleted")
     trails = list(mongo.db.trails.find())
-    return render_template("all_trails.html", trails=trails)
+    return render_template("all_trails.html", trails=trails, get_avg_rating=get_avg_rating)
 
 
 # Add a trail to planned trails with post
@@ -237,7 +237,7 @@ def planning_trail(trail_id):
     flash("Trail Added to your plan")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
 
 
 # Add a trail to completed trails
@@ -265,7 +265,7 @@ def completed_trail(trail_id):
     flash("Trail Marked as Completed")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
 
 
 # add comment to review
@@ -285,7 +285,7 @@ def add_comment(review_id, trail_id):
     flash("Comment added successfully")
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
 
 
 # Delete Post
@@ -300,7 +300,7 @@ def delete_post(review_id):
     hiker = mongo.db.users.find_one({"name": session["name"]})
     hiker_id = mongo.db.users.find_one({"name": session["name"]})["_id"]
     reviews = mongo.db.reviews.find({"post_by": ObjectId(hiker_id)})
-    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail)
+    return render_template("hiker_profile.html", name=name, hiker=hiker, reviews=reviews, get_trail=get_trail, get_avg_rating=get_avg_rating)
 
 
 # Add a trail to completed trails
@@ -324,7 +324,7 @@ def add_new_trail():
     flash("Trail Added")
     trail = mongo.db.trails.find_one({"name": newtrail["trail_name"]})
     reviews = ""
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
 
 
 # Edit a trail info
@@ -362,7 +362,7 @@ def edit_trail(trail_id):
     trail_id = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})["_id"]
     trail = mongo.db.trails.find_one({"_id": ObjectId(trail_id)})
     reviews = mongo.db.reviews.find({"trail_id": ObjectId(trail_id)})
-    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user)
+    return render_template("trail_page.html", trail=trail, reviews=reviews, get_user=get_user, get_avg_rating=get_avg_rating)
 
 
 # add image route 
@@ -388,6 +388,18 @@ def add_image():
         }}})
     name =  session["name"]
     return redirect(url_for("my_account", name=name))
+
+
+# get average rating for trail
+@app.route("/get_avg_rating/<id>")
+def get_avg_rating(id):
+    ratings = list(mongo.db.reviews.find({"trail_id": ObjectId(id),"trail_status" :"completed"},["review_rating"]))
+    r = 0
+    for rate in ratings:
+        r = r + rate["review_rating"]
+        average_rating = round((r / len(ratings)), 0)
+    return int(average_rating)
+
 
 # make sure to debug= False before submit
 if __name__ == "__main__":
