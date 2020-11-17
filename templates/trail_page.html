@@ -163,8 +163,7 @@
                     </div>
                 </div>
             {% endif %}
-                  <a class="btn deep-orange lighten-2 trail-action-btn">
-                  comments <i class="fas fa-caret-down"></i></a>
+                  <a class="comments modal-trigger"> comments <i class="far fa-comments"></i></a>
                 </div>
               </div>
             </div>
@@ -189,7 +188,10 @@
             </div>
           </div>
         {% endfor %}
-            <a class="btn green lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">Add comment </a>
+        <span class="review-stars-div">
+            <a class="add-comment modal-trigger" 
+            href="#add_comment_{{ review._id }}">Add Comment  <i class=" far fa-comment"></i></a>
+        </span>
         </div>
       <!-- "Add Comment form -->
         <div id="add_comment_{{ review._id }}" class="modal">

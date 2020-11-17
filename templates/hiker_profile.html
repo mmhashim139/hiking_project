@@ -175,7 +175,10 @@
                     </div>
                 </div>
             {% endif %}
-                <a class="btn deep-orange lighten-2 trail-action-btn modal-trigger" href="#add_comment_{{ review._id }}">comment</a>
+                <span class="review-stars-div">
+                    <a class="trail-action-btn add-comment modal-trigger" 
+                    href="#add_comment_{{ review._id }}">Add Comment  <i class=" far fa-comment"></i></a>
+                </span>
               <!-- "Add Comment form -->
                 <div id="add_comment_{{ review._id }}" class="modal">
                     <div class="modal-content">
