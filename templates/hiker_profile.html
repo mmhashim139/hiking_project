@@ -45,7 +45,7 @@
 <section>
   <div class="container">
   {% if hiker.gallery %}
-    <h3 class="cta-header">{{ hiker.profile_name }} Gallery </h3>
+    <h3 class="header">{{ hiker.profile_name }} Gallery </h3>
   {% endif %}
 
        {% if session.name == hiker.name %}
@@ -69,7 +69,7 @@
        {% if session.name == "admin" %}
         <section>
         <div class="container">
-            <div class="cta-header">Add a trail to HIKINI</div>
+            <div class="header">Add a trail to HIKINI</div>
             <!-- Add trail Modal Trigger -->
             <div class="sign-up-btn">
             <a class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger" href="#add_new_trail">Add new Trail</a>
@@ -82,7 +82,7 @@
 <section>
   <div class="container">
     {% if hiker.Added_trails %}
-    <h3 class="cta-header">{{ hiker.profile_name }} trails</h3>
+    <h3 class="header">{{ hiker.profile_name }} trails</h3>
     {% endif %}
     {% for review in reviews %}
     <div class="col s12 m7">
@@ -94,7 +94,7 @@
               <div class="trail-header trail-btm-info">
                 {{ get_trail(review.trail_id).trail_name }}
               </div>
-                <div class="container">
+                <div class="container trail-review-status">
                 {% if review.trail_status == "completed" %}
                 <span><i class="fas fa-check-circle completed-icon"></i>Completed</span>
                 {% else %}
@@ -198,7 +198,8 @@
 <!-- Other Hikers in HIKINIE-->
 <section class="hikers-section">
   <div class="container">
-    <h2 class="cta-header">Other Hikers ..</h2>
+    <h2 class="header">Other Hikers ..</h2>
+    <div class="sub-header">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, consectetur.</div>
     <!-- I am using Owl Carousel to show cards , animation added in script.js file-->
     <div class="slider owl-carousel more-hiker-slider">
       {% for h in hikers %}
@@ -237,7 +238,8 @@
 {% else %}
 <section>
   <div class="container">
-    <div class="cta-header">Join our Community ..</div>
+    <div class="header">Join our Community ..</div>
+    <div class="sub-header">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, consectetur.</div>
     <!-- Sign up Modal Trigger -->
     <div class="sign-up-btn">
       <a
@@ -260,7 +262,8 @@
 
 <section>
   <div class="container">
-    <div class="cta-header">Find your next trail..</div>
+    <div class="header">Find your next trail..</div>
+    <div class="sub-header">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, consectetur.</div>
     <div class="slider owl-carousel more-trail-slider">
       {% for t in trails %}
       <a href="{{ url_for('trail_page', trail_id=t._id) }}" class="more-trails-cards-link">

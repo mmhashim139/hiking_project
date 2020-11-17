@@ -12,6 +12,7 @@
 }
 .slider .btn {
     margin-top: 50px;
+    text-shadow: none;
 }
 
 /* ======== trail Cards style ====== ===*/
@@ -323,4 +324,52 @@
 .add-comment, .comments {
     color: rgb(255, 81, 28);
     font-size: 18px;
+}
+
+.header{
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.sub-header{
+    color: gray;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    margin: 50px 70px;
+}
+
+.trail-review-status {
+    height: 40px;
+    text-align: center;
+}
+
+.review-main-card {
+    width: 100% !important;
+}
+
+
+/* Media Queries  */
+/* small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .slider .slides li .caption h2 {
+        font-size: 40px;
+    }
+    .header{
+        font-size: 24px;
+        margin: 30px 0px;
+    }
+    .sub-header{
+        margin: 15px 0px 50px 0px;
+        font-size: 18px;
+    }
+    .trail-action-btn{
+        margin-left: 0%;
+        margin-bottom: -15px;
+    }
+    .collapsible-header i{
+        margin-right: 0 !important;
+    }
 }
