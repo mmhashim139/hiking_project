@@ -20,31 +20,13 @@
 <section>
   <div class="container">
     <div class="profile-header">
-      <img
-        class="hiker-profile-img"
-        src="{{ hiker.profile_img }}"
-      />
+      <img class="hiker-profile-img" src="{{ hiker.profile_img }}"/>
     </div>
     <div class="hiker-name">{{ hiker.profile_name }}</div>
     <div class="hiker-socials">
-      <a
-        class="hiker-socials-icon"
-        href="{{ hiker.facebook_link }}"
-        target="_blank"
-        ><i class="fab fa-facebook"></i
-      ></a>
-      <a
-        class="hiker-socials-icon"
-        href="{{ hiker.instagram_link }}"
-        target="_blank"
-        ><i class="fab fa-instagram"></i
-      ></a>
-      <a
-        class="hiker-socials-icon"
-        href="{{ hiker.twitter_link  }}"
-        target="_blank"
-        ><i class="fab fa-twitter-square"></i
-      ></a>
+      <a class="hiker-socials-icon" href="{{ hiker.facebook_link }}" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a class="hiker-socials-icon" href="{{ hiker.instagram_link }}" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a class="hiker-socials-icon" href="{{ hiker.twitter_link  }}" target="_blank"><i class="fab fa-twitter-square"></i></a>
     </div>
     <div class="hiker-profile-bio">
       <p>
@@ -77,10 +59,7 @@
     <div class="owl-carousel">
     <!-- Render images from hiker gallery -->
         {% for img in hiker.gallery %}
-      <img
-        class="hiker-gallery-img"
-        src="{{ img.img_url }}" />
-
+      <img class="hiker-gallery-img" src="{{ img.img_url }}" />
         {% endfor %}
     </div>
   </div>
@@ -88,19 +67,15 @@
 
 <!-- Add Trail -->
        {% if session.name == "admin" %}
-<section>
-  <div class="container">
-    <div class="cta-header">Add a trail to HIKINI</div>
-    <!-- Add trail Modal Trigger -->
-    <div class="sign-up-btn">
-      <a
-        class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger"
-        href="#add_new_trail"
-        >Add new Trail</a
-      >
-    </div>
-  </div>
-</section>
+        <section>
+        <div class="container">
+            <div class="cta-header">Add a trail to HIKINI</div>
+            <!-- Add trail Modal Trigger -->
+            <div class="sign-up-btn">
+            <a class="waves-effect waves-light btn deep-orange lighten-2 modal-trigger" href="#add_new_trail">Add new Trail</a>
+            </div>
+        </div>
+        </section>
       {%  endif %}
 
 <!-- Hiker selected trails with review -->
@@ -114,9 +89,7 @@
       <div class="card">
         <div class="row">
           <div class="card-image col s12 m4">
-            <img
-              src="{{ get_trail(review.trail_id).trail_image }}"
-            />
+            <img src="{{ get_trail(review.trail_id).trail_image }}"/>
             <div class="trail-btm-div">
               <div class="trail-header trail-btm-info">
                 {{ get_trail(review.trail_id).trail_name }}
@@ -218,9 +191,7 @@
 <!-- Parallax  -->
 <div class="parallax-container">
   <div class="parallax">
-    <img
-      src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"
-    />
+    <img src="https://cdn.pixabay.com/photo/2016/03/09/16/46/hiking-1246836_960_720.jpg"/>
   </div>
 </div>
 
@@ -234,9 +205,7 @@
       <div class="col s12 m4">
       <div class="card hiker-card">
         <div>
-          <img class="hiker-card-img"
-            src="{{ h.profile_img }}"
-          />
+          <img class="hiker-card-img" src="{{ h.profile_img }}"/>
         </div>
         <div class="hiker-name">{{ h.profile_name }}</div>
         <div class="hiker-state">
@@ -535,7 +504,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="Confirm Password" id="password2" name="password2" type="password" class="validate" required/>
-                <label for="password_confirmation">Confirm Password</label>
+                <label for="password2">Confirm Password</label>
               </div>
             </div>
             <div class="sign-up-btn">
